@@ -809,7 +809,7 @@ static void shdisp_bdic_seq_led_blink_on(unsigned char color, int ontime, int in
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -839,7 +839,7 @@ static void shdisp_bdic_seq_led_firefly_on(unsigned char color, int ontime, int 
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -869,7 +869,7 @@ static void shdisp_bdic_seq_led_high_speed_on(unsigned char color, int interval,
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -897,7 +897,7 @@ static void shdisp_bdic_seq_led_standard_on(unsigned char color, int interval, i
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -925,7 +925,7 @@ static void shdisp_bdic_seq_led_breath_on(unsigned char color, int interval, int
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -953,7 +953,7 @@ static void shdisp_bdic_seq_led_long_breath_on(unsigned char color, int interval
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -981,7 +981,7 @@ static void shdisp_bdic_seq_led_wave_on(unsigned char color, int interval, int c
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -1009,7 +1009,7 @@ static void shdisp_bdic_seq_led_flash_on(unsigned char color, int interval, int 
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -1037,7 +1037,7 @@ static void shdisp_bdic_seq_led_aurora_on(int interval, int count)
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -1065,7 +1065,7 @@ static void shdisp_bdic_seq_led_rainbow_on(int interval, int count)
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -1095,7 +1095,7 @@ static void shdisp_bdic_seq_led_pattern1_on(int interval, int count)
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -1123,7 +1123,7 @@ static void shdisp_bdic_seq_led_pattern2_on(int interval, int count)
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
@@ -1152,7 +1152,7 @@ static void shdisp_bdic_seq_led_emopattern_on(int interval, int count)
 #endif /* SHDISP_COLOR_LED_TWIN */
 
     if (led_state_str.bdic_chipver >= SHDISP_BDIC_CHIPVER_1) {
-        if (count != 0) {
+        if (interval != 0) {
             shdisp_bdic_seq_bdic_standby_for_led(SHDISP_DEV_TYPE_LED);
         }
     }
