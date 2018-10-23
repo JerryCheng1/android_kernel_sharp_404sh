@@ -1235,6 +1235,11 @@ static int ipa_wwan_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 					rmnet_mux_val.mux_id);
 				return rc;
 			}
+			if (rmnet_index >= MAX_NUM_OF_MUX_CHANNEL) {
+				IPAWANERR("Exceed mux_channel limit(%d)\n",
+					  rmnet_index);
+				return -EFAULT;
+			}
 			IPAWANDBG("ADD_MUX_CHANNEL(%d, name: %s)\n",
 			extend_ioctl_data.u.rmnet_mux_val.mux_id,
 			extend_ioctl_data.u.rmnet_mux_val.vchannel_name);
@@ -1685,6 +1690,7 @@ static int ipa_wwan_probe(struct platform_device *pdev)
 	struct wwan_private *wwan_ptr;
 	struct ipa_rm_create_params ipa_rm_params;	/* IPA_RM */
 	struct ipa_rm_perf_profile profile;			/* IPA_RM */
+	int uc_loading_condition;
 
 	pr_info("rmnet_ipa started initialization\n");
 
@@ -1721,7 +1727,9 @@ static int ipa_wwan_probe(struct platform_device *pdev)
 	/* start A7 QMI service/client */
 	if (ipa_rmnet_res.ipa_loaduC) {
 		/* Android platform loads uC */
-		ipa_qmi_service_init(atomic_read(&is_ssr) ? false : true,
+		uc_loading_condition = atomic_read(&is_ssr) &
+				       atomic_read(&ipa_ctx->uc_ctx.uc_loaded);
+		ipa_qmi_service_init(uc_loading_condition ? false : true,
 			QMI_IPA_PLATFORM_TYPE_MSM_ANDROID_V01);
 	} else {
 		/* LE platform not loads uC */
