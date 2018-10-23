@@ -1,0 +1,129 @@
+/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&soc {
+	tlmm_pinmux: pinctrl@fd510000 {
+		compatible = "qcom,msm-tlmm-8994", "qcom,msm-tlmm-8974";
+		reg = <0xfd510000 0x4000>;
+		interrupts = <0 208 0>;
+
+		/*****************************************/
+		/*  pinctrl customize setting            */
+		/*  NFC/FeliCa                           */
+		/*****************************************/
+		sharp_pinctrl_fel_int{
+			qcom,pins = <&gp 29>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "fel_int_n";
+			fel_int_active: active {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+			fel_int_suspend: suspend {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		sharp_pinctrl_nfc_en{
+			qcom,pins = <&gp 95>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "nfc_en";
+			nfc_en_active: active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+			nfc_en_suspend: suspend {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		sharp_pinctrl_fel_rfs{
+			qcom,pins = <&gp 108>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "fel_rfs";
+			fel_rfs_active: active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+			fel_rfs_suspend: suspend {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		sharp_pinctrl_nfc_uart_tx{
+			qcom,pins = <&gp 85>;
+			qcom,num-grp-pins = <1>;
+			label = "nfc_uart_tx";
+			nfc_uart_tx_active: active {
+				qcom,pin-func = <2>;
+				drive-strength = <2>;
+				bias-disable;
+			};
+			nfc_uart_tx_suspend: suspend {
+				qcom,pin-func = <0>;
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+		sharp_pinctrl_nfc_uart_rx{
+			qcom,pins = <&gp 86>;
+			qcom,num-grp-pins = <1>;
+			label = "nfc_uart_rx";
+			nfc_uart_rx_active: active {
+				qcom,pin-func = <2>;
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+			nfc_uart_rx_suspend: suspend {
+				qcom,pin-func = <0>;
+				drive-strength = <2>;
+			};
+		};
+
+
+		sharp_pinctrl_nfc_uart_cts{
+			qcom,pins = <&gp 87>;
+			qcom,num-grp-pins = <1>;
+			label = "nfc_uart_cts";
+			nfc_uart_cts_active: active {
+				qcom,pin-func = <2>;
+				drive-strength = <2>;
+			};
+			nfc_uart_cts_suspend: suspend {
+				qcom,pin-func = <0>;
+				drive-strength = <2>;
+			};
+		};
+
+		sharp_pinctrl_nfc_uart_rts{
+			qcom,pins = <&gp 88>;
+			qcom,num-grp-pins = <1>;
+			label = "nfc_uart_rts";
+			nfc_uart_rts_active: active {
+				qcom,pin-func = <2>;
+				drive-strength = <2>;
+				bias-disable;
+			};
+			nfc_uart_rts_suspend: suspend {
+				qcom,pin-func = <0>;
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+	};
+};

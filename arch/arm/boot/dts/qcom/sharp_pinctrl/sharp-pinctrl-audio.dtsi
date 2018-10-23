@@ -1,0 +1,89 @@
+/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&soc {
+	tlmm_pinmux: pinctrl@fd510000 {
+		compatible = "qcom,msm-tlmm-8994", "qcom,msm-tlmm-8974";
+		reg = <0xfd510000 0x4000>;
+		interrupts = <0 208 0>;
+
+		/*****************************************/
+		/*  pinctrl customize setting            */
+		/*  audio/audience                       */
+		/*****************************************/
+		sharp_pinctrl_aud_clk_active {
+			qcom,pins = <&gp 27>;
+			qcom,pin-func = <4>;
+			qcom,num-grp-pins = <1>;
+			label = "sharp_pinctrl_aud_clk_active";
+			sharp_pinctrl_aud_clk_active: sharp_pinctrl_aud_clk_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		sharp_pinctrl_aud_clk_suspend {
+			qcom,pins = <&gp 27>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "sharp_pinctrl_aud_clk_suspend";
+			sharp_pinctrl_aud_clk_suspend: sharp_pinctrl_aud_clk_suspend {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		sharp_pinctrl_aud_reset{
+			qcom,pins = <&gp 66>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "aud_reset";
+			aud_reset_active: active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+			aud_reset_suspend: suspend {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		sharp_pinctrl_aud_inta{
+			qcom,pins = <&gp 96>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "aud_inta";
+			aud_inta_active: active {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+			aud_inta_suspend: suspend {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		sharp_pinctrl_aud_intb{
+			qcom,pins = <&gp 65>;
+			qcom,pin-func = <0>;
+			qcom,num-grp-pins = <1>;
+			label = "aud_intb";
+			aud_intb_active: active {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+			aud_intb_suspend: suspend {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+	};
+};

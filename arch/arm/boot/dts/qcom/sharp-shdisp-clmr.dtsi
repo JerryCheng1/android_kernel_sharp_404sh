@@ -1,0 +1,44 @@
+/* Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&soc {
+	/*---------------------*/
+	/* BLSP1 QUP0(BLSP#1)  */
+	/*---------------------*/
+	blsp2_spi3: spi@f9965000 {
+		clmr_spi@0 {
+			status = "disable";
+			compatible = "sharp,clmr_spi";
+			reg = <0>;
+			spi-max-frequency = <48000000>;
+			spi-cpol;
+			spi-cpha;
+			spi-cs-high;
+		};
+	};
+	
+	/*---------------------*/
+	/* LCD controller      */
+	/*---------------------*/    
+	sharp,shdisp_clmr {
+		compatible = "sharp,shdisp_clmr";
+		status = "disable";
+		clmr_vdd_18tx-supply = <&pm8994_l32>;
+		clmr_vdd_12lp-supply = <&pm8994_l2>;
+		interrupts = <34 0>;
+		interrupt-parent = <&msm_gpio>;
+		clmr_rst_gpio = <&msm_gpio 78 0>;
+		clmr_pllon_gpio = <&msm_gpio 8 0>;
+		clmr_hint_gpio = <&msm_gpio 34 0>;
+		clmr_vdd_gpio = <&msm_gpio 107 0>;
+	};
+};

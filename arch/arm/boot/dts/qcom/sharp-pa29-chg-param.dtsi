@@ -1,0 +1,57 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+
+/****************************************/
+/*  pmi8994_charger			*/
+/****************************************/
+&pmi8994_charger {
+	qcom,float-voltage-mv = <4360>;
+	qcom,fastchg-current-comp = <1200>;
+	qcom,fastchg-current-ma = <2100>;
+	qcom,float-voltage-comp = <7>;
+	qcom,charging-timeout-mins = <1536>;
+	qcom,precharging-timeout-mins = <24>;
+	qcom,dc-psy-ma = <1500>;
+// 	qcom,wipower-div2-ilim-map;
+// 	qcom,wipower-pt-ilim-map;
+// 	qcom,wipower-default-ilim-map;
+	/delete-property/ qcom,charging-disabled;
+	qcom,resume-delta-mv = <200>;
+	/delete-property/ qcom,chg-inhibit-en;
+	/delete-property/ qcom,chg-inhibit-fg;
+	/delete-property/ qcom,bmd-algo-disabled;
+	qcom,charge-unknown-battery;
+// 	qcom,bmd-pin-src;
+	qcom,iterm-ma = <100>;
+	/delete-property/ qcom,iterm-disabled;
+// 	qcom,thermal-mitigation;
+	qcom,rparasitic-uohm = <100000>;
+	/delete-property/ qcom,autoadjust-vfloat;
+	/delete-property/ qcom,soft-vfloat-comp-disabled;
+// 	qcom,parallel-usb-min-current-ma;
+// 	qcom,parallel-usb-9v-min-current-ma;
+	qcom,thermal-mitigation-hvdcp-vol-up = <9 9 9 9 9 9 9 9 9 9 5 5 5 5>;
+	qcom,thermal-mitigation-hvdcp-vol-down = <9 5 5 5 5 5 5 5 5 5 5 5 5 5>;
+// 	qcom,resume-soc;
+};
+
+/****************************************/
+/*  pmi8994_fg			*/
+/****************************************/
+&pmi8994_fg {
+	qcom,cool-bat-decidegc = <100>;
+	qcom,warm-bat-decidegc = <450>;
+	qcom,cold-bat-decidegc = <0>;
+	qcom,hot-bat-decidegc = <500>;
+	qcom,use-otp-profile;
+};

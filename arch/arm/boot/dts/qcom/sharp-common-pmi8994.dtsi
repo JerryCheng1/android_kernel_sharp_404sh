@@ -1,0 +1,376 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/*****************************************/
+/*  pmi8994: qcom,pmi8994 alias            */
+/*****************************************/
+
+&spmi_bus {
+	
+	qcom,pmi8994@2 {
+		pmi8994_vadc: vadc@3100 {
+		};
+	};
+
+	qcom,pmi8994@3 {
+	};
+};
+
+/*****************************************/
+/*  pmi8994-gpios: qpnp-pin               */
+/*****************************************/
+
+&pmi8994_gpios {
+
+	gpio@c000 { /* GPIO_01 */
+		/* VFEL_RST */
+		qcom,mode = <1>;			/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <5>;			/* NO_PULL */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c100 { /* GPIO_02 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c200 { /* GPIO_03 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c300 { /* GPIO_04 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c400 { /* GPIO_05 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c500 { /* GPIO_06 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c600 { /* GPIO_07 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c700 { /* GPIO_08 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c800 { /* GPIO_09 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	gpio@c900 { /* GPIO_10 */
+		/* Unused */
+		qcom,mode = <0>;			/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;			/* DISABLE */
+		qcom,pull = <4>;			/* PULL_DN */
+		qcom,vin-sel = <2>;			/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;			/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+};
+/*****************************************/
+/*  pmi8994-mpps: qpnp-pin                */
+/*****************************************/
+
+&pmi8994_mpps {
+
+	mpp@a000 { /* MPP_01 */
+		/* VBAT_MONITOR */
+		qcom,mode = <4>;		/* Analog Input */
+		qcom,src-sel = <1>;		/* MPP is always enabled */
+		qcom,ain-route = <0>;	/* QPNP_PIN_AIN_AMUX_CH5 */
+		qcom,master-en = <1>;		/* ENSABLE */
+		status = "okay";
+	};
+
+	mpp@a100 { /* MPP_02 */
+		/* CCI_TIMER1 */
+		/* Qualcomm Settings */
+	};
+
+	mpp@a200 { /* MPP_03 */
+		/* PMI_SPON */
+		/* Qualcomm Settings */
+	};
+
+	mpp@a300 { /* MPP_04 */
+		/* EXT_FET_WLED_PWR_EN */
+		qcom,mode = <6>;		/* Current Sink */
+		qcom,src-sel = <0>;		/* MPP is always disabled */
+		qcom,ain-route = <3>;	/* QPNP_PIN_AIN_AMUX_CH8 */
+		status = "okay";
+	};
+};
+/*****************************************/
+/*  pmi8994: rpm-regulator                */
+/*****************************************/
+&pmi8994_s1 { /* pmi8994_s1 */
+};
+
+&pmi8994_s2_corner { /* pmi8994_s2_corner */
+};
+
+&pmi8994_s2_floor_corner { /* pmi8994_s2_floor_corner */
+};
+
+&pmi8994_boostbypass { /* pmi8994_boostbypass */
+};
+
+&pm8994_s5 { /* 8994_s5 */
+};
+
+&pm8994_s7 { /* 8994_s7 */
+};
+/* PM8994 S8 = VDD_APC0 supply */
+&pm8994_s8 { /* 8994_s8 */
+};
+
+/*****************************************/
+/*  qpnp-adc-voltage                     */
+/*****************************************/
+
+&pmi8994_vadc {
+	chan@0 { /* usbin */
+		label = "usbin";
+		reg = <0>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <4>;
+		qcom,calibration-type = "absolute";
+		qcom,scale-function = <0>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+
+	chan@1 { /* dcin */
+		label = "dcin";
+		reg = <1>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <4>;
+		qcom,calibration-type = "absolute";
+		qcom,scale-function = <0>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+	
+	chan@8 { /* die_temp */
+		label = "die_temp";
+		reg = <8>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <0>;
+		qcom,calibration-type = "ratiometric";
+		qcom,scale-function = <3>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+	
+	chan@43 { /* usb_dp */
+		label = "usb_dp";
+		reg = <0x43>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <1>;
+		qcom,calibration-type = "absolute";
+		qcom,scale-function = <0>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+
+	chan@44 { /* usb_dm */
+		label = "usb_dm";
+		reg = <0x44>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <1>;
+		qcom,calibration-type = "absolute";
+		qcom,scale-function = <0>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+
+	chan@4 { /* usb_id */
+		label = "usb_id";
+		reg = <0x4>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <1>;
+		qcom,calibration-type = "ratiometric";
+		qcom,scale-function = <0>;
+		qcom,hw-settle-time = <5>;
+		qcom,fast-avg-setup = <0>;
+	};
+
+	chan@20 { /* vbat */
+		label = "vbat";
+		reg = <0x20>;
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <1>;
+		qcom,calibration-type = "absolute";
+		qcom,scale-function = <13>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+};
+
+/*****************************************/
+/*  pmi8994_charger                     */
+/*****************************************/
+&pmi8994_charger {
+//	qcom,charging-disabled;
+	qcom,charge-unknown-battery;
+//	qcom,float-voltage-mv = <4200>;
+};
+
+
+/*****************************************/
+/*  qpnp-smbcharger  Increase of stage   */
+/*****************************************/
+
+&spmi_bus {
+	qcom,pmi8994@2 {
+		pmi8994_charger: qcom,qpnp-smbcharger {
+			qcom,thermal-mitigation = <1500 1400 1300 1200 1100 1000 900 800 700 600 500 400 300 0>;
+		};
+	};
+	qcom,pmi8994@3 {
+	}; 
+/* [PMIC/BATT][#37322]2015.03.06 ADD-START */
+	qcom,pm8994@0 {
+		qcom,qpnp-smbcharger {
+			spmi-dev-container;
+			compatible = "qcom,qpnp-smbcharger";
+			qcom,pm8994-spmi;
+		};
+	};
+/* [PMIC/BATT][#37322]2015.03.06 ADD-END */
+};
+
+
+/*****************************************/
+/*  pmi8994_fg                          */
+/*****************************************/
+&pmi8994_fg {
+	qcom,ext-sense-type;
+};
+
+/*****************************************/
+/*  camera led                           */
+/*****************************************/
+&spmi_bus{
+    qcom,pmi8994@3{
+        qcom,leds@d300{
+            /delete-property/ qcom,clamp-curr;
+            /delete-property/ qcom,thermal-derate-enabled;
+            /delete-property/ qcom,thermal-derate-threshold;
+            /delete-property/ qcom,thermal-derate-rate;
+            /delete-property/ qcom,vph-pwr-droop-enabled;
+            /delete-property/ qcom,vph-pwr-droop-threshold;
+            /delete-property/ qcom,vph-pwr-droop-debounce-time;
+            /delete-property/ qcom,headroom-sense-ch1-enabled;
+            /delete-property/ qcom,power-detect-enabled;
+        };
+    };
+};
+
+&pmi8994_flash0{
+    qcom,clamp-curr = <100>;
+    qcom,duration = <250>;
+};
+
+/delete-node/ &pmi8994_flash1;
+
+&pmi8994_torch0{
+    qcom,max-current = <1000>;
+    qcom,current = <25>;
+};
+
+/delete-node/ &pmi8994_torch1;

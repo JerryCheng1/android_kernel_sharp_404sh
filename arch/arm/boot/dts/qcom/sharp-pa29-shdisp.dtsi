@@ -1,0 +1,119 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "sharp-shdisp-ir2e71y6.dtsi"
+#include "sharp-shdisp-dsi-panel-aria-pa29-1080p-cmd.dtsi"
+#include "sharp-shdisp-aria.dtsi"
+
+&soc {
+	sharp,shdisp_kerl {
+		status = "disable";
+		compatible = "sharp,shdisp_kerl";
+		test_mode_gpio = <&msm_gpio 63 0>;
+	};
+};
+
+&soc {
+	i2c@f9965000 {
+		bdic_i2c@54 {
+			status = "ok";
+		};
+
+		bdic_i2c@39 {
+			status = "ok";
+		};
+	};
+};
+
+&soc {
+
+	sharp,shdisp_kerl {
+		status = "ok";
+	};
+	sharp,shdisp_ir2e71y6 {
+		status = "ok";
+	};
+	sharp,shdisp_panel {
+		status = "ok";
+	};
+};
+
+&dsi_shdisp_aria {
+	status = "ok";
+
+	qcom,mdss-pan-physical-width-dimension = <71>;
+	qcom,mdss-pan-physical-height-dimension = <126>;
+};
+
+&mdss_mdp {
+	qcom,mdss-pref-prim-intf = "dsi";
+};
+
+&mdss_dsi0 {
+	qcom,platform-strength-ctrl = [FF 06];
+	qcom,dsi-pref-prim-pan=<&dsi_shdisp_aria>;
+
+	pinctrl-names = "mdss_default", "mdss_sleep";
+	pinctrl-0 = <&mdss_dsi_active &mdss_te_active>;
+	pinctrl-1 = <&mdss_dsi_suspend &mdss_te_suspend>;
+
+	qcom,platform-te-gpio = <&msm_gpio 10 0>;
+
+	/delete-property/ vdd-supply;
+	/delete-property/ qcom,dsi-panel-bias-vreg;
+	/delete-property/ qcom,platform-reset-gpio;
+	/delete-property/ qcom,platform-bklight-en-gpio;
+	/delete-property/ qcom,platform-enable-gpio;
+
+	qcom,panel-supply-entries {
+		/delete-node/ qcom,panel-supply-entry@0;
+	};
+};
+
+&mdss_dsi1 {
+	/delete-property/ vdd-supply;
+
+	qcom,panel-supply-entries {
+		/delete-node/ qcom,panel-supply-entry@0;
+	};
+};
+
+&mdss_hdmi_tx {
+	status = "disabled";
+};
+
+&mdss_hdmi_pll {
+    status = "disabled";
+};
+
+&spmi_bus{
+    qcom,pmi8994@3{
+		qcom,leds@d000 {
+            status = "disabled";
+        };
+    };
+};
+
+/ {
+	memory {
+		display_mem: display_mem@0 {
+			linux,reserve-contiguous-region;
+			linux,reserve-region;
+			reg = <0 0 0 0x00FF0000>;
+			label = "display_mem";
+		};
+	};
+};
+
+&mdss_fb0 {
+	linux,contiguous-region = <&display_mem>;
+};

@@ -1,0 +1,1240 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/*****************************************/
+/*  PM8994 PMI8994                       */
+/*****************************************/
+#include "sharp-common-pm8994.dtsi"
+#include "sharp-common-pmi8994.dtsi"
+#include "sharp-pinctrl.dtsi"
+
+#include "sharp-common-sdcc.dtsi"
+ 
+/*----------------------------------------*/
+/* Delete Qualcomm settings.              */
+/*----------------------------------------*/
+/ {
+	aliases {
+		spi0 = &blsp1_spi1;
+		spi1 = &blsp1_spi2;
+		spi2 = &blsp1_spi3;
+		spi3 = &blsp1_spi4;
+		spi4 = &blsp1_spi5;
+		spi5 = &blsp1_spi6;
+		spi6 = &blsp2_spi1;
+		spi7 = &blsp2_spi2;
+		spi8 = &blsp2_spi3;
+		spi9 = &blsp2_spi4;
+		spi10 = &blsp2_spi5;
+		spi11 = &blsp2_spi6;
+		
+		i2c1 = &blsp1_i2c1;
+		i2c2 = &blsp1_i2c2;
+		i2c3 = &blsp1_i2c3;
+		i2c4 = &blsp1_i2c4;
+		i2c5 = &blsp1_i2c5;
+		i2c6 = &blsp1_i2c6;
+		i2c7 = &blsp2_i2c1;
+		i2c8 = &blsp2_i2c2;
+		i2c9 = &blsp2_i2c3;
+		i2c10 = &blsp2_i2c4;
+		i2c11 = &blsp2_i2c5;
+		i2c12 = &blsp2_i2c6;
+		
+
+		uart0 = &blsp2_uart2;
+		uart1 = &blsp1_uart1;
+		uart2 = &blsp1_uart2;
+		uart3 = &blsp1_uart3;
+		uart4 = &blsp1_uart4;
+		uart5 = &blsp1_uart5;
+		uart6 = &blsp1_uart6;
+		uart7 = &blsp2_uart3;
+		uart8 = &blsp2_uart4;
+		uart9 = &blsp2_uart5;
+		serial1 = &blsp2_uart6;
+		serial3 = &blsp2_uart1;
+	};
+	
+	soc {
+		/delete-node/ serial@f991e000;
+		/delete-node/ serial@f991f000;
+		/delete-node/ uart@f995e000;
+		/delete-node/ qcom,pcie@fc520000;
+	};
+};
+
+/*----------------------------------------*/
+/* Add SHARP settings.                    */
+/*----------------------------------------*/
+&soc {
+    /*****************************************/
+	/*  BLSP1                                */
+	/*****************************************/
+	/*---------------------*/
+	/* BLSP1 QUP0(BLSP#1)  */
+	/*---------------------*/
+	blsp1_spi1: spi@f9923000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9923000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 95 0>, <0 238 0>;
+		spi-max-frequency = <48000000>;
+		
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <12>;
+		qcom,bam-producer-pipe-index = <13>;
+		qcom,master-id = <86>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp1_spi1_mo_clk_active &blsp1_spi1_mi_active &blsp1_spi1_cs_active>;
+		pinctrl-1 = <&blsp1_spi1_mo_clk_sleep &blsp1_spi1_mi_sleep &blsp1_spi1_cs_sleep>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			<&clock_gcc clk_gcc_blsp1_qup1_spi_apps_clk>;
+		status = "disabled";
+	};
+
+	blsp1_i2c1: i2c@f9923000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9923000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 95 0>, <0 238 0>;
+		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup1_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_1_active>;
+		pinctrl-1 = <&i2c_1_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <12>;
+		qcom,bam-pipe-idx-prod = <13>;
+		qcom,master-id = <86>;
+		status = "disabled";
+	};
+	
+	blsp1_uart1: uart@f991d000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf991d000 0x1000>,
+			<0xf9904000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp1_uart1>;
+		interrupts = <0 107 0>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 107 0
+				1 &intc 0 238 0
+				2 &msm_gpio 1 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <0>;
+		qcom,bam-rx-ep-pipe-index = <1>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_uart1_apps_clk>,
+			<&clock_gcc clk_gcc_blsp1_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart1_sleep>;
+		pinctrl-1 = <&hsuart1_active>;
+
+		qcom,msm-bus,name = "buart1";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP1 QUP1(BLSP#2)  */
+	/*---------------------*/
+	blsp1_spi2: spi@f9924000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9924000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 96 0>, <0 238 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <14>;
+		qcom,bam-producer-pipe-index = <15>;
+		qcom,master-id = <86>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp1_spi2_mo_cs_clk_active &blsp1_spi2_mi_active>;
+		pinctrl-1 = <&blsp1_spi2_mo_cs_clk_sleep &blsp1_spi2_mi_sleep>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup2_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp1_i2c2: i2c@f9924000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9924000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 96 0>, <0 238 0>;
+		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup2_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_2_active>;
+		pinctrl-1 = <&i2c_2_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <14>;
+		qcom,bam-pipe-idx-prod = <15>;
+		qcom,master-id = <86>;
+		status = "disabled";
+	};
+	
+	blsp1_uart2: uart@f991e000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf991e000 0x1000>,
+			<0xf9904000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp1_uart2>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 238 0
+				2 &msm_gpio 5 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <2>;
+		qcom,bam-rx-ep-pipe-index = <3>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_uart2_apps_clk>,
+			<&clock_gcc clk_gcc_blsp1_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart2_sleep>;
+		pinctrl-1 = <&hsuart2_active>;
+
+		qcom,msm-bus,name = "buart2";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP1 QUP2(BLSP#3)  */
+	/*---------------------*/
+	blsp1_spi3: spi@f9925000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9925000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 97 0>, <0 238 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+// fpsensor-S
+//		qcom,use-bam;
+// fpsensor-E
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <16>;
+		qcom,bam-producer-pipe-index = <17>;
+		qcom,master-id = <86>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp1_spi3_mo_active &blsp1_spi3_mi_active &blsp1_spi3_cs_clk_active>;
+		pinctrl-1 = <&blsp1_spi3_mo_sleep &blsp1_spi3_mi_sleep &blsp1_spi3_cs_clk_sleep>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup3_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp1_i2c3: i2c@f9925000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9925000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 97 0>, <0 238 0>;
+		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup3_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_3_active>;
+		pinctrl-1 = <&i2c_3_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <16>;
+		qcom,bam-pipe-idx-prod = <17>;
+		qcom,master-id = <86>;
+		status = "disabled";
+	};
+	
+	blsp1_uart3: uart@f991f000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf991f000 0x1000>,
+			<0xf9904000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp1_uart3>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 238 0
+				2 &msm_gpio 9 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <4>;
+		qcom,bam-rx-ep-pipe-index = <5>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_uart3_apps_clk>,
+			<&clock_gcc clk_gcc_blsp1_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart3_sleep_tx_rx &hsuart3_sleep_cts_rts>;
+		pinctrl-1 = <&hsuart3_active_tx_rx &hsuart3_active_cts_rts>;
+
+		qcom,msm-bus,name = "buart3";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP1 QUP3(BLSP#4)  */
+	/*---------------------*/
+	blsp1_spi4: spi@f9926000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9926000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 98 0>, <0 238 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <18>;
+		qcom,bam-producer-pipe-index = <19>;
+		qcom,master-id = <86>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp1_spi4_active>;
+		pinctrl-1 = <&blsp1_spi4_sleep>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup4_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp1_i2c4: i2c@f9926000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9926000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 98 0>, <0 238 0>;
+		qcom,clk-freq-out = <400000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup4_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_4_active_sda_scl_fnc4>;
+		pinctrl-1 = <&i2c_4_sleep_sda_fnc3 &i2c_4_sleep_scl_fnc4>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <18>;
+		qcom,bam-pipe-idx-prod = <19>;
+		qcom,master-id = <86>;
+		status = "disabled";
+	};
+	
+	blsp1_uart4: uart@f9920000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf9920000 0x1000>,
+			<0xf9904000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp1_uart4>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 238 0
+				2 &msm_gpio 18 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <6>;
+		qcom,bam-rx-ep-pipe-index = <7>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_uart4_apps_clk>,
+			<&clock_gcc clk_gcc_blsp1_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart4_sleep>;
+		pinctrl-1 = <&hsuart4_active>;
+
+		qcom,msm-bus,name = "buart4";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP1 QUP4(BLSP#5)  */
+	/*---------------------*/
+	blsp1_spi5: spi@f9927000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9927000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 99 0>, <0 238 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <20>;
+		qcom,bam-producer-pipe-index = <21>;
+		qcom,master-id = <86>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp1_spi5_active_mo_mi_cs &blsp1_spi5_active_clk>;
+		pinctrl-1 = <&blsp1_spi5_sleep_mo_mi_cs &blsp1_spi5_sleep_clk>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup5_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp1_i2c5: i2c@f9927000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9927000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 99 0>, <0 238 0>;
+		qcom,clk-freq-out = <400000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup5_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_5_active_sda &i2c_5_active_scl>;
+		pinctrl-1 = <&i2c_5_sleep_sda &i2c_5_sleep_scl>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <20>;
+		qcom,bam-pipe-idx-prod = <21>;
+		qcom,master-id = <86>;
+		status = "disabled";
+	};
+	
+	blsp1_uart5: uart@f9921000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf9921000 0x1000>,
+			<0xf9904000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp1_uart5>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 238 0
+				2 &msm_gpio 22 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <8>;
+		qcom,bam-rx-ep-pipe-index = <9>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_uart5_apps_clk>,
+			<&clock_gcc clk_gcc_blsp1_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart5_sleep_tx_rx_cts &hsuart5_sleep_rts>;
+		pinctrl-1 = <&hsuart5_active_tx_rx_cts &hsuart5_active_rts>;
+
+		qcom,msm-bus,name = "buart5";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP1 QUP5(BLSP#6)  */
+	/*---------------------*/
+	blsp1_spi6: spi@f9928000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9928000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 100 0>, <0 238 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <20>;
+		qcom,bam-producer-pipe-index = <21>;
+		qcom,master-id = <86>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp1_spi6_active_mo &blsp1_spi6_active_mi &blsp1_spi6_active_cs_clk>;
+		pinctrl-1 = <&blsp1_spi6_sleep_mo &blsp1_spi6_sleep_mi &blsp1_spi6_sleep_cs_clk>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup6_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp1_i2c6: i2c@f9928000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9928000 0x1000>,
+		      <0xf9904000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 100 0>, <0 238 0>;
+		qcom,clk-freq-out = <400000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup6_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_6_sda_active &i2c_6_scl_active>;
+		pinctrl-1 = <&i2c_6_sda_sleep &i2c_6_scl_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <22>;
+		qcom,bam-pipe-idx-prod = <23>;
+		qcom,master-id = <86>;
+		status = "disabled";
+	};
+	
+	blsp1_uart6: uart@f9922000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf9922000 0x1000>,
+			<0xf9904000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp1_uart6>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 112 0
+				1 &intc 0 238 0
+				2 &msm_gpio 26 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <10>;
+		qcom,bam-rx-ep-pipe-index = <11>;
+		qcom,master-id = <86>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp1_uart6_apps_clk>,
+			<&clock_gcc clk_gcc_blsp1_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart6_sleep_tx &hsuart6_sleep_rx>;
+		pinctrl-1 = <&hsuart6_active_tx &hsuart6_active_rx>;
+
+		qcom,msm-bus,name = "buart6";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*****************************************/
+	/*  BLSP2                                */
+	/*****************************************/
+	/*---------------------*/
+	/* BLSP2 QUP0(BLSP#7)  */
+	/*---------------------*/
+	blsp2_spi1: spi@f9963000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9963000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 101 0>, <0 239 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <12>;
+		qcom,bam-producer-pipe-index = <13>;
+		qcom,master-id = <84>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp2_spi7_active>;
+		pinctrl-1 = <&blsp2_spi7_sleep>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup1_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp2_i2c1: i2c@f9963000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9963000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 101 0>, <0 239 0>;
+		qcom,clk-freq-out = <400000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup1_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_7_active>;
+		pinctrl-1 = <&i2c_7_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <12>;
+		qcom,bam-pipe-idx-prod = <13>;
+		qcom,master-id = <84>;
+		status = "disabled";
+	};
+	
+	blsp2_uart1: serial@f995d000 {
+		compatible = "qcom,msm-lsuart-v14";
+		reg = <0xf995d000 0x1000>;
+		interrupts = <0 113 0>;
+		qcom,use-pm;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart7_tx_sleep &hsuart7_rx_sleep>;
+		pinctrl-1 = <&hsuart7_tx_active &hsuart7_rx_active>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_uart1_apps_clk>,
+			<&clock_gcc clk_gcc_blsp2_ahb_clk>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP2 QUP1(BLSP#8)  */
+	/*---------------------*/
+	blsp2_spi2: spi@f9964000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9964000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 102 0>, <0 239 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <14>;
+		qcom,bam-producer-pipe-index = <15>;
+		qcom,master-id = <84>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp2_spi8_active>;
+		pinctrl-1 = <&blsp2_spi8_sleep>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup2_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp2_i2c2: i2c@f9964000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9964000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 102 0>, <0 239 0>;
+		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup2_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_8_active>;
+		pinctrl-1 = <&i2c_8_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <14>;
+		qcom,bam-pipe-idx-prod = <15>;
+		qcom,master-id = <84>;
+		status = "disabled";
+	};
+	
+	blsp2_uart2: uart@f995e000 { /* BLSP2 UART2 */
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf995e000 0x1000>,
+			<0xf9944000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp2_uart2>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 114 0
+				1 &intc 0 239 0
+				2 &msm_gpio 46 0>;
+
+// Bluetooth Driver Add-S
+		qcom,rfr-gpio = <&msm_gpio 48 0x00>;
+// Bluetooth Driver Add-E
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <2>;
+		qcom,bam-rx-ep-pipe-index = <3>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_uart2_apps_clk>,
+			<&clock_gcc clk_gcc_blsp2_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart8_sleep>;
+		pinctrl-1 = <&hsuart8_active>;
+
+		qcom,msm-bus,name = "buart8";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP2 QUP2(BLSP#9)  */
+	/*---------------------*/
+	blsp2_spi3: spi@f9965000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9965000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 103 0>, <0 239 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <16>;
+		qcom,bam-producer-pipe-index = <17>;
+		qcom,master-id = <84>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp2_spi9_active_mo &blsp2_spi9_active_mi &blsp2_spi9_active_cs_clk>;
+		pinctrl-1 = <&blsp2_spi9_sleep_mo &blsp2_spi9_sleep_mi &blsp2_spi9_sleep_cs_clk>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup3_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp2_i2c3: i2c@f9965000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9965000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 103 0>, <0 239 0>;
+		qcom,clk-freq-out = <400000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup3_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_9_active>;
+		pinctrl-1 = <&i2c_9_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <16>;
+		qcom,bam-pipe-idx-prod = <17>;
+		qcom,master-id = <84>;
+		status = "disabled";
+	};
+	
+	blsp2_uart3: uart@f995f000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf995f000 0x1000>,
+			<0xf9944000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp2_uart3>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 239 0
+				2 &msm_gpio 50 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <4>;
+		qcom,bam-rx-ep-pipe-index = <5>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_uart3_apps_clk>,
+			<&clock_gcc clk_gcc_blsp2_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart9_sleep>;
+		pinctrl-1 = <&hsuart9_active>;
+
+		qcom,msm-bus,name = "buart9";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP2 QUP3(BLSP#10)  */
+	/*---------------------*/
+	blsp2_spi4: spi@f9966000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9966000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 104 0>, <0 239 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <18>;
+		qcom,bam-producer-pipe-index = <19>;
+		qcom,master-id = <84>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp2_spi10_active_mo &blsp2_spi10_active_mi &blsp2_spi10_active_cs_clk>;
+		pinctrl-1 = <&blsp2_spi10_sleep_mo &blsp2_spi10_sleep_mi &blsp2_spi10_sleep_cs_clk>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup4_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp2_i2c4: i2c@f9966000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9966000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 104 0>, <0 239 0>;
+		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup4_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_10_active>;
+		pinctrl-1 = <&i2c_10_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <18>;
+		qcom,bam-pipe-idx-prod = <19>;
+		qcom,master-id = <84>;
+		status = "disabled";
+	};
+	
+	blsp2_uart4: uart@f9960000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf9960000 0x1000>,
+			<0xf9944000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp2_uart4>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 239 0
+				2 &msm_gpio 54 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <6>;
+		qcom,bam-rx-ep-pipe-index = <7>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_uart4_apps_clk>,
+			<&clock_gcc clk_gcc_blsp2_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart10_sleep_tx_rx &hsuart10_sleep_cts_rts>;
+		pinctrl-1 = <&hsuart10_active_tx_rx &hsuart10_active_cts_rts>;
+
+		qcom,msm-bus,name = "buart10";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP2 QUP4(BLSP#11)  */
+	/*---------------------*/
+	blsp2_spi5: spi@f9967000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9967000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 105 0>, <0 239 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <20>;
+		qcom,bam-producer-pipe-index = <21>;
+		qcom,master-id = <84>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp2_spi11_active_mo_mi &blsp2_spi_11_active_cs_clk>;
+		pinctrl-1 = <&blsp2_spi11_sleep_mo_mi &blsp2_spi_11_sleep_cs_clk>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup5_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp2_i2c5: i2c@f9967000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9967000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 105 0>, <0 239 0>;
+		qcom,clk-freq-out = <400000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup5_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_11_active>;
+		pinctrl-1 = <&i2c_11_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <20>;
+		qcom,bam-pipe-idx-prod = <21>;
+		qcom,master-id = <84>;
+		status = "disabled";
+	};
+	
+	blsp2_uart5: uart@f9961000 {
+		compatible = "qcom,msm-hsuart-v14";
+		reg = <0xf9961000 0x1000>,
+			<0xf9944000 0x19000>;
+		reg-names = "core_mem", "bam_mem";
+		interrupt-names = "core_irq", "bam_irq", "wakeup_irq";
+		#address-cells = <0>;
+		interrupt-parent = <&blsp2_uart5>;
+		interrupts = <0 1 2>;
+		#interrupt-cells = <1>;
+		interrupt-map-mask = <0xffffffff>;
+		interrupt-map = <0 &intc 0 108 0
+				1 &intc 0 239 0
+				2 &msm_gpio 82 0>;
+
+		qcom,inject-rx-on-wakeup;
+		qcom,rx-char-to-inject = <0xFD>;
+
+		qcom,bam-tx-ep-pipe-index = <8>;
+		qcom,bam-rx-ep-pipe-index = <9>;
+		qcom,master-id = <84>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_uart5_apps_clk>,
+			<&clock_gcc clk_gcc_blsp2_ahb_clk>;
+		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart11_sleep_tx_rx &hsuart11_sleep_cts_rts>;
+		pinctrl-1 = <&hsuart11_active_tx_rx &hsuart11_active_cts_rts>;
+
+		qcom,msm-bus,name = "buart11";
+		qcom,msm-bus,num-cases = <2>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps =
+				<84 512 0 0>,
+				<84 512 500 800>;
+		status = "disabled";
+	};
+	
+	/*---------------------*/
+	/* BLSP2 QUP5(BLSP#12)  */
+	/*---------------------*/
+	blsp2_spi6: spi@f9968000 {
+		compatible = "qcom,spi-qup-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "spi_physical", "spi_bam_physical";
+		reg = <0xf9968000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "spi_irq", "spi_bam_irq";
+		interrupts = <0 106 0>, <0 239 0>;
+		spi-max-frequency = <48000000>;
+
+		qcom,infinite-mode = <0>;
+		qcom,use-bam;
+		qcom,ver-reg-exists;
+		qcom,bam-consumer-pipe-index = <22>;
+		qcom,bam-producer-pipe-index = <23>;
+		qcom,master-id = <84>;
+		qcom,use-pinctrl;
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&blsp2_spi_12_active>;
+		pinctrl-1 = <&blsp2_spi_12_sleep>;
+
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup6_spi_apps_clk>;
+		status = "disabled";
+	};
+	
+	blsp2_i2c6: i2c@f9968000 {
+		compatible = "qcom,i2c-msm-v2";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg-names = "qup_phys_addr", "bam_phys_addr";
+		reg = <0xf9968000 0x1000>,
+		      <0xf9944000 0x19000>;
+		interrupt-names = "qup_irq", "bam_irq";
+		interrupts = <0 106 0>, <0 239 0>;
+		qcom,clk-freq-out = <100000>;
+		qcom,clk-freq-in  = <19200000>;
+		clock-names = "iface_clk", "core_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp2_qup6_i2c_apps_clk>;
+
+		pinctrl-names = "i2c_active", "i2c_sleep";
+		pinctrl-0 = <&i2c_12_active>;
+		pinctrl-1 = <&i2c_12_sleep>;
+		qcom,noise-rjct-scl = <0>;
+		qcom,noise-rjct-sda = <0>;
+		qcom,bam-pipe-idx-cons = <20>;
+		qcom,bam-pipe-idx-prod = <21>;
+		qcom,master-id = <84>;
+		status = "disabled";
+	};
+	
+	blsp2_uart6: serial@f9962000 {
+		compatible = "qcom,msm-lsuart-v14";
+		reg = <0xf9962000 0x1000>;
+		interrupts = <0 118 0>;
+		qcom,use-pm;
+		pinctrl-names = "sleep", "active";
+//		pinctrl-names = "sleep", "default";
+		pinctrl-0 = <&hsuart12_tx_sleep &hsuart12_rx_sleep &hsuart12_cts_sleep &hsuart12_rfr_sleep>;
+		pinctrl-1 = <&hsuart12_tx_active &hsuart12_rx_active &hsuart12_cts_active &hsuart12_rfr_active>;
+		clock-names = "core_clk", "iface_clk";
+		clocks = <&clock_gcc clk_gcc_blsp2_uart6_apps_clk>,
+			<&clock_gcc clk_gcc_blsp2_ahb_clk>;
+		status = "disabled";
+	};
+	
+	sec_nfc {
+		compatible = "sec-nfc";
+		qcom,fel-int-gpio  = <&msm_gpio 29 0x00>;
+		qcom,nfc-en-gpio   = <&msm_gpio 95 0x00>;
+		qcom,fel-rfs-gpio  = <&msm_gpio 108 0x00>;
+		qcom,uart-tx-gpio  = <&msm_gpio 85 0x00>;
+		qcom,uart-rx-gpio  = <&msm_gpio 86 0x00>;
+		qcom,uart-cts-gpio  = <&msm_gpio 87 0x00>;
+		qcom,uart-rts-gpio  = <&msm_gpio 88 0x00>;
+		qcom,vfel-rst-gpio = <&pmi8994_gpios 1 0x00>;
+		interrupt-parent  = <&msm_gpio>;
+		interrupts = <29 0>;
+		interrupt-names = "fel_int_n";
+		pinctrl-names = "fel_int_active","fel_int_suspend",
+						"nfc_en_active","nfc_en_suspend",
+						"fel_rfs_active","fel_rfs_suspend",
+						"nfc_uart_tx_active","nfc_uart_tx_suspend",
+						"nfc_uart_rx_active","nfc_uart_rx_suspend",
+						"nfc_uart_cts_active","nfc_uart_cts_suspend",
+						"nfc_uart_rts_active","nfc_uart_rts_suspend";
+		pinctrl-0 = <&fel_int_active>;
+		pinctrl-1 = <&fel_int_suspend>;
+		pinctrl-2 = <&nfc_en_active>;
+		pinctrl-3 = <&nfc_en_suspend>;
+		pinctrl-4 = <&fel_rfs_active>;
+		pinctrl-5 = <&fel_rfs_suspend>;
+		pinctrl-6 = <&nfc_uart_tx_active>;
+		pinctrl-7 = <&nfc_uart_tx_suspend>;
+		pinctrl-8 = <&nfc_uart_rx_active>;
+		pinctrl-9 = <&nfc_uart_rx_suspend>;
+		pinctrl-10 = <&nfc_uart_cts_active>;
+		pinctrl-11 = <&nfc_uart_cts_suspend>;
+		pinctrl-12 = <&nfc_uart_rts_active>;
+		pinctrl-13 = <&nfc_uart_rts_suspend>;
+	};
+
+	sec_nfc_fn {
+		compatible = "sec-nfc-fn";
+		qcom,push-gpio  = <&msm_gpio 29 0x00>;
+		interrupt-parent  = <&msm_gpio>;
+		interrupts = <29 0>;
+		interrupt-names = "push_n";
+		pinctrl-names = "fel_int_active","fel_int_suspend";
+		pinctrl-0 = <&fel_int_active>;
+		pinctrl-1 = <&fel_int_suspend>;
+	};
+	/*----------------------------------------------*/
+	/* msm_thermal cpu_clock restriction thresholds */
+	/*----------------------------------------------*/
+	qcom,msm-thermal {
+		qcom,limit-temp = <75>;
+		qcom,temp-hysteresis = <5>;
+	};
+	
+	/* GPU overrides */
+	msm_gpu: qcom,kgsl-3d0@fdb00000 {
+		qcom,initial-pwrlevel = <5>;
+	};
+
+/* USB Customize Add Start */
+	usb3: ssusb@f9200000 {
+		dwc3@f9200000 {
+			maximum-speed = "high-speed";
+		};
+	};
+/* USB Customize Add End */
+};

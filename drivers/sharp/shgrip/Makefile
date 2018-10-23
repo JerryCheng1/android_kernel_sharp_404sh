@@ -1,0 +1,9 @@
+ifneq (, $(filter F%, $(SH_BUILD_ID)))
+EXTRA_CFLAGS += -DSHGRIP_FACTORY_MODE_ENABLE
+endif
+
+ifeq ($(CONFIG_ARCH_DECKARD_AL20),y)
+obj-$(CONFIG_SENSOR_SHGRIP)	+= 001/
+else
+obj-$(CONFIG_SENSOR_SHGRIP) += 002/
+endif

@@ -1,0 +1,506 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/*****************************************/
+/*  pm8994-gpios: qpnp-pin               */
+/*****************************************/
+
+&pm8994_gpios {
+
+	gpio@c000 { /* GPIO_01 */
+		/* Unused */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <4>;		/* PULL_DN */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c100 { /* GPIO_02 */
+		/* Unused */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <4>;		/* PULL_DN */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c200 { /* GPIO_03 */
+		/* UP_KEY */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <0>;		/* PULL_UP_30 */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c300 { /* GPIO_04 */
+		/* DOWN_KEY */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <0>;		/* PULL_UP_30 */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <3>;	/* HIGH */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c400 { /* GPIO_05 */
+		/* SPPD_N */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c500 { /* GPIO_06 */
+		/* Unused */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <4>;		/* PULL_DN */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c600 { /* GPIO_07 */
+		/* SD_POW_EN */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c700 { /* GPIO_08 */
+		/* SDDET_N */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <1>;		/* ENABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c800 { /* GPIO_09 */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@c900 { /* GPIO_10 */
+		/* Unused */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <4>;		/* PULL_DN */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@ca00 { /* GPIO_11 */
+		/* Unused */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <4>;		/* PULL_DN */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@cb00 { /* GPIO_12 */
+		/* GRIP_RST_N */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@cc00 { /* GPIO_13 */
+		/* Unused */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <1>;		/* ENABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@cd00 { /* GPIO_14 */
+		/* Unused */
+		qcom,mode = <0>;		/* DIG_IN */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <4>;		/*  PULL_DN */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@ce00 { /* GPIO_15 */
+	};
+
+	gpio@cf00 { /* GPIO_16 */
+	};
+
+	gpio@d000 { /* GPIO_17 */
+		/* AUD_CLK */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@d100 { /* GPIO_18 */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <3>;		/* SPECIAL_FUNCTION */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@d200 { /* GPIO_19 */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	gpio@d300 { /* GPIO_20 */
+	};
+
+	gpio@d400 { /* GPIO_21 */
+	};
+
+	gpio@d500 { /* GPIO_22 */
+		/* DTV_PWR_EN */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,output-type = <0>;		/* CMOS */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,pull = <5>;		/* NO_PULL */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,out-strength = <1>;	/* LOW */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+};
+
+/*****************************************/
+/*  pm8994-mpps: qpnp-pin                */
+/*****************************************/
+
+&pm8994_mpps {
+
+	mpp@a000 { /* MPP_01 */
+	};
+
+	mpp@a100 { /* MPP_02 */
+		/* Unused */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+	};
+
+	mpp@a200 { /* MPP_03 */
+	};
+
+	mpp@a300 { /* MPP_04 */
+		/* Unused */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+
+	};
+
+	mpp@a400 { /* MPP_05 */
+		/* Unused */
+		qcom,mode = <1>;		/* DIG_OUT */
+		qcom,invert = <0>;		/* DISABLE */
+		qcom,vin-sel = <2>;		/* S4 */
+		qcom,src-sel = <0>;		/* CONSTANT */
+		qcom,master-en = <1>;		/* ENSABLE */
+
+	};
+
+	mpp@a500 { /* MPP_06 */
+	};
+
+	mpp@a600 { /* MPP_07 */
+	};
+
+	mpp@a700 { /* MPP_08 */
+	};
+};
+/*****************************************/
+/*  pm8994: rpm-regulator                */
+/*****************************************/
+/* PM8994 S1 + S6 = 2 phase VDD_CX supply */
+&pm8994_s1_corner { /* 8994_s1_corner */
+};
+
+&pm8994_s1_floor_corner { /* 8994_s1_floor_corner */
+};
+
+&pm8994_s1_corner_ao { /* 8994_s1_corner_ao */
+};
+
+/* PM8994 S2 + S12 = 2 phase VDD_MX supply */
+&pm8994_s2_corner { /* 8994_s2_corner */
+};
+
+&pm8994_s2_corner_ao { /* 8994_s2_corner_ao */
+};
+
+&pm8994_s3 { /* 8994_s3 */
+};
+
+&pm8994_s4 { /* 8994_s4 */
+};
+
+&pm8994_s5 { /* 8994_s5 */
+};
+
+&pm8994_s7 { /* 8994_s7 */
+};
+/* PM8994 S8 = VDD_APC0 supply */
+&pm8994_s8 { /* 8994_s8 */
+};
+/*
+ * PM8994 S9 + S10 + S11 = 3 phase VDD_APC1 supply
+ * S11 is the gang leader.
+ */
+&pm8994_s11 { /* 8994_s11 */
+};
+
+&pm8994_l1 { /* 8994_l1 */
+};
+
+&pm8994_l2 { /* 8994_l2 */
+};
+
+&pm8994_l3 { /* 8994_l3 */
+};
+
+&pm8994_l4 { /* 8994_l4 */
+};
+
+//&pm8994_l5 { /* 8994_l5 not found*/
+//};
+
+&pm8994_l6 { /* 8994_l6 */
+};
+
+//&pm8994_l7 { /* 8994_l7 not found*/
+//};
+
+&pm8994_l8 { /* 8994_l8 */
+};
+
+&pm8994_l9 { /* 8994_l9 */
+//	regulator-always-on;
+	qcom,pull-down-enable = <1>;
+//	qcom,auto-mode-enable = <0>;
+	qcom,bypass-mode-enable = <1>;
+	regulator-min-microvolt = <1800000>;
+	regulator-max-microvolt = <2950000>;
+	qcom,init-voltage = <1800000>;
+	status = "okay";
+};
+
+&pm8994_l10 { /* 8994_l10 */
+};
+
+&pm8994_l11 { /* 8994_l11 */
+};
+
+&pm8994_l12 { /* 8994_l12 */
+};
+
+&pm8994_l13 { /* 8994_l13 */
+};
+
+&pm8994_l14 { /* 8994_l14 */
+	qcom,init-pin-ctrl-mode = <16>;
+};
+
+&pm8994_l15 { /* 8994_l15 */
+};
+
+&pm8994_l16 { /* 8994_l16 */
+};
+
+&pm8994_l17 { /* 8994_l17 */
+	regulator-min-microvolt = <3100000>;
+	regulator-max-microvolt = <3100000>;
+	qcom,init-voltage = <3100000>;
+};
+
+&pm8994_l18 { /* 8994_l18 */
+};
+
+&pm8994_l19 { /* 8994_l19 */
+};
+
+&pm8994_l20 { /* 8994_l20 */
+};
+
+&pm8994_l21 { /* 8994_l21 */
+};
+
+&pm8994_l22 { /* 8994_l22 */
+};
+
+&pm8994_l23 { /* 8994_l23 */
+};
+
+&pm8994_l24 { /* 8994_l24 */
+};
+
+&pm8994_l25 { /* 8994_l25 */
+	regulator-min-microvolt = <1100000>;
+	regulator-max-microvolt = <1100000>;
+	qcom,init-voltage = <1100000>;
+};
+
+&pm8994_l26 { /* 8994_l26 */
+};
+
+&pm8994_l27 { /* 8994_l27 */
+};
+
+&pm8994_l28 { /* 8994_l28 */
+};
+
+&pm8994_l29 { /* 8994_l29 */
+	qcom,init-pin-ctrl-mode = <16>;
+};
+
+&pm8994_l30 { /* 8994_l30 */
+};
+
+&pm8994_l31 { /* 8994_l31 */
+};
+
+&pm8994_l32 { /* 8994_l32 */
+};
+
+&pm8994_lvs1 { /* 8994_lvs1 */
+};
+
+&pm8994_lvs2 { /* 8994_lvs2 */
+	regulator-always-on;
+};
+
+/*****************************************/
+/*  qpnp-adc-voltage                     */
+/*****************************************/
+
+&pm8994_vadc {
+	chan@5 { /* vcoin */
+	};
+
+	chan@7 { /* vph_pwr */
+	};
+	
+	chan@30 { /* batt_therm */
+	};
+
+	chan@73 { /* msm_therm */
+	};
+
+	chan@74 { /* emmc_therm -> cam_therm */
+	};
+
+	chan@75 { /* pa_therm0 */
+	};
+
+	chan@77 { /* pa_therm1 */
+	};
+
+	chan@78 { /* quiet_therm -> lcd_therm */
+	};
+	
+	chan@7C { /* xo_therm */
+	};
+	
+	chan@76 { /* hw_id */
+	};
+};
+
+/*****************************************/
+/*  qpnp-adc-tm                         */
+/*****************************************/
+
+&pm8994_adc_tm {
+	chan@73 { /* msm_therm */
+	};
+
+	chan@74 { /* emmc_therm -> cam_therm */
+	};
+
+	chan@75 { /* pa_therm0 */
+	};
+
+	chan@77 { /* pa_therm1 */
+	};
+
+	chan@78 { /* quiet_therm -> lcd_therm */
+	};
+	
+	chan@7C { /* xo_therm */
+	};
+};

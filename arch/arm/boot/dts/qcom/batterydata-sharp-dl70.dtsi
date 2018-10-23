@@ -1,0 +1,60 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+qcom,sharp-dl70 {
+	/* #1921190_Sharp_DL70_3000mAh_averaged_MasterSlave_Feb26th2015*/
+	qcom,max-voltage-uv = <4350000>;
+	qcom,nom-batt-capacity-mah = <3000>;
+	qcom,batt-id-kohm = <0>;
+	qcom,battery-beta = <3380>;
+	qcom,battery-type = "sharp";
+	qcom,rslow-comp-along-soc-c1-ch-milli = <2706>;
+	qcom,rslow-comp-along-soc-c2-ch-milli = <3567>;
+	qcom,rs-to-rslow-charge-fix-milli = <814>;
+	qcom,rslow-comp-ch-fix-th-milli = <623>;
+	qcom,checksum = <0xA1EE>;
+	qcom,gui-version = "PMI8994GUI - 2.1.6.2";
+	qcom,fg-profile-data = [
+		 FB 83 9C 7D 
+		 7B 81 F5 77 
+		 54 83 17 43 
+		 D4 80 02 8C 
+		 A5 82 09 93 
+		 D3 B5 72 C2 
+		 5E 14 02 88 
+		 76 7D 46 81 
+		 79 77 61 83 
+		 28 66 07 88 
+		 1A 8F B1 82 
+		 58 93 75 B6 
+		 9A C3 58 12 
+		 62 0B 25 60 
+		 CE 6E 71 FD 
+		 46 37 CC 47 
+		 56 42 00 00 
+		 4A 47 09 32 
+		 07 41 00 00 
+		 00 00 00 00 
+		 00 00 00 00 
+		 5A 6B 4B 6A 
+		 3B 69 67 82 
+		 65 74 4F 68 
+		 64 6A E9 81 
+		 00 6F 48 62 
+		 49 8D 45 B3 
+		 15 B5 61 34 
+		 5F A0 71 0C 
+		 28 00 FF 36 
+		 F0 11 30 03 
+		 00 00 00 00 
+	];
+};

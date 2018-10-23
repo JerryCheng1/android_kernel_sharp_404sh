@@ -1,0 +1,1260 @@
+/* Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&soc {
+	tlmm_pinmux: pinctrl@fd510000 {
+		compatible = "qcom,msm-tlmm-8994", "qcom,msm-tlmm-8974";
+		reg = <0xfd510000 0x4000>;
+		interrupts = <0 208 0>;
+		
+		blsp1_uart1_active {
+			qcom,pins = <&gp 0>, <&gp 1>, <&gp 2>, <&gp 3>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart1_active";
+			hsuart1_active: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart1_sleep {
+			qcom,pins = <&gp 0>, <&gp 1>, <&gp 2>, <&gp 3>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart1_sleep";
+			hsuart1_sleep: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart2_active {
+			qcom,pins = <&gp 4>, <&gp 5>, <&gp 6>, <&gp 7>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart2_active";
+			hsuart2_active: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart2_sleep {
+			qcom,pins = <&gp 4>, <&gp 5>, <&gp 6>, <&gp 7>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart2_sleep";
+			hsuart2_sleep: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart3_active_tx_rx {
+			qcom,pins = <&gp 8>, <&gp 9>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart3_active_tx_rx";
+			hsuart3_active_tx_rx: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart3_active_cts_rts {
+			qcom,pins = <&gp 10>, <&gp 11>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart3_active_cts_rts";
+			hsuart3_active_cts_rts: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart3_sleep_tx_rx {
+			qcom,pins = <&gp 8>, <&gp 9>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart3_sleep_tx_rx";
+			hsuart3_sleep_tx_rx: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart3_sleep_cts_rts {
+			qcom,pins = <&gp 10>, <&gp 11>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart3_sleep_cts_rts";
+			hsuart3_sleep_cts_rts: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+
+		blsp1_uart4_active {
+			qcom,pins = <&gp 17>, <&gp 18>, <&gp 19>, <&gp 20>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <3>;
+		        label = "lsp1_uart4_active";
+			hsuart4_active: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart4_sleep {
+			qcom,pins = <&gp 17>, <&gp 18>, <&gp 19>, <&gp 20>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart4_sleep";
+			hsuart4_sleep: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart5_active_tx_rx_cts {
+			qcom,pins = <&gp 21>, <&gp 22>, <&gp 23>;
+			qcom,num-grp-pins = <3>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart5_active_tx_rx_cts";
+			hsuart5_active_tx_rx_cts: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart5_active_rts {
+			qcom,pins = <&gp 24>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <4>;
+		        label = "blsp1_uart5_active_rts";
+			hsuart5_active_rts: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart5_sleep_tx_rx_cts {
+			qcom,pins = <&gp 21>, <&gp 22>, <&gp 23>;
+			qcom,num-grp-pins = <3>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart5_sleep_tx_rx_cts";
+			hsuart5_sleep_tx_rx_cts: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart5_sleep_rts {
+			qcom,pins =<&gp 24>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <4>;
+		        label = "blsp1_uart5_sleep_rts";
+			hsuart5_sleep_rts: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart6_active_tx {
+			qcom,pins = <&gp 25>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <4>;
+		        label = "blsp1_uart6_active_tx";
+			hsuart6_active_tx: default {
+				drive-strength = <2>;
+/* SH_AUDIO_DRIVER -> */ /*14-061*/
+//				bias-disable;
+				bias-pull-up;
+/* SH_AUDIO_DRIVER <- */ /*14-061*/
+			};
+		};
+
+		blsp1_uart6_active_rx {
+			qcom,pins = <&gp 26>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart6_active_rx";
+			hsuart6_active_rx: default {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+
+		blsp1_uart6_active_cts_rts {
+			qcom,pins =<&gp 27>, <&gp 28>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart6_active_cts_rts";
+			hsuart6_active_cts_rts: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp1_uart6_sleep_tx {
+			qcom,pins = <&gp 25>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <4>;
+		        label = "blsp1_uart6_sleep_tx";
+			hsuart6_sleep_tx: sleep {
+				drive-strength = <2>;
+/* SH_AUDIO_DRIVER -> */ /*14-061*/
+//				bias-disable;
+				bias-pull-up;
+/* SH_AUDIO_DRIVER <- */ /*14-061*/
+			};
+		};
+
+		blsp1_uart6_sleep_rx {
+			qcom,pins = <&gp 26>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+		        label = "blsp1_uart6_sleep_rx";
+			hsuart6_sleep_rx: sleep {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+
+		blsp1_uart6_sleep_cts_rts {
+			qcom,pins = <&gp 27>, <&gp 28>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp1_uart6_sleep_cts_rts";
+			hsuart6_sleep_cts_rts: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_serial1_tx_active {
+			qcom,pins = <&gp 41>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+		        label = "blsp2_serial1_tx_active";
+			hsuart7_tx_active: default {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+		blsp2_serial1_tx_sleep {
+			qcom,pins = <&gp 41>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+		        label = "blsp2_serial1_tx_sleep";
+			hsuart7_tx_sleep: sleep {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+		blsp2_serial1_rx_active {
+			qcom,pins = <&gp 42>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+		        label = "blsp2_serial1_rx_active";
+			hsuart7_rx_active: default {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+
+		blsp2_serial1_rx_sleep {
+			qcom,pins = <&gp 42>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+		        label = "blsp2_serial1_rx_sleep";
+			hsuart7_rx_sleep: sleep {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+
+		blsp2_serial2_active {
+			qcom,pins = <&gp 45>, <&gp 46>, <&gp 47>, <&gp 48>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial2_active";
+			hsuart8_active: default {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		blsp2_serial2_sleep {
+			qcom,pins = <&gp 45>, <&gp 46>, <&gp 47>, <&gp 48>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial2_sleep";
+			hsuart8_sleep: sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart3_active {
+			qcom,pins = <&gp 49>, <&gp 50>, <&gp 51>, <&gp 52>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <3>;
+		        label = "blsp2_uart3_active";
+			hsuart9_active: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart3_sleep {
+			qcom,pins = <&gp 49>, <&gp 50>, <&gp 51>, <&gp 52>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <3>;
+		        label = "blsp2_uart3_sleep";
+			hsuart9_sleep: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart4_active_tx_rx {
+			qcom,pins = <&gp 53>, <&gp 54>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <4>;
+		        label = "blsp2_uart4_active_tx_rx";
+			hsuart10_active_tx_rx: default {
+				drive-strength = <16>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_uart4_active_cts_rts {
+			qcom,pins = <&gp 55>, <&gp 56>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+		        label = "blsp2_uart4_active_cts_rts";
+			hsuart10_active_cts_rts: default {
+				drive-strength = <16>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart4_sleep_tx_rx {
+			qcom,pins = <&gp 53>, <&gp 54>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_uart4_sleep_tx_rx";
+			hsuart10_sleep_tx_rx: sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart4_sleep_cts_rts {
+			qcom,pins = <&gp 55>, <&gp 56>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_uart4_sleep_cts_rts";
+			hsuart10_sleep_cts_rts: sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart5_active_tx_rx {
+			qcom,pins = <&gp 81>, <&gp 82>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+		        label = "blsp2_uart5_active_tx_rx";
+			hsuart11_active_tx_rx: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart5_active_cts_rts {
+			qcom,pins = <&gp 83>, <&gp 84>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <23>;
+		        label = "blsp2_uart5_active_cts_rts";
+			hsuart11_active_cts_rts: default {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart5_sleep_tx_rx {
+			qcom,pins = <&gp 81>, <&gp 82>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+		        label = "blsp2_uart5_sleep_tx_rx";
+			hsuart11_sleep_tx_rx: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_uart5_sleep_cts_rts{
+			qcom,pins = <&gp 83>, <&gp 84>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_uart5_sleep_cts_rts";
+			hsuart11_sleep_cts_rts: sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		blsp2_serial6_active_tx {
+			qcom,pins = <&gp 85>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_active_tx";
+			hsuart12_tx_active: default {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_serial6_active_rx {
+			qcom,pins = <&gp 86>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_active_rx";
+			hsuart12_rx_active: default {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+		
+		blsp2_serial6_active_cts {
+			qcom,pins = <&gp 87>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_active_cts";
+			hsuart12_cts_active: default {
+				drive-strength = <2>;
+				bias-keeper;
+			};
+		};
+		
+		blsp2_serial6_active_rfr {
+			qcom,pins = <&gp 88>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_active_rfr";
+			hsuart12_rfr_active: default {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		blsp2_serial6_sleep_tx {
+			qcom,pins = <&gp 85>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_sleep_tx";
+			hsuart12_tx_sleep: default {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_serial6_sleep_rx {
+			qcom,pins = <&gp 86>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_sleep_rx";
+			hsuart12_rx_sleep: default {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+		
+		blsp2_serial6_sleep_cts {
+			qcom,pins = <&gp 87>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_sleep_cts";
+			hsuart12_cts_sleep: default {
+				drive-strength = <2>;
+				bias-keeper;
+			};
+		};
+		
+		blsp2_serial6_sleep_rfr {
+			qcom,pins = <&gp 88>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+		        label = "blsp2_serial6_sleep_rfr";
+			hsuart12_rfr_sleep: default {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		blsp1_spi1_mo_clk {
+			qcom,pins = <&gp 0>, <&gp 3>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi1_mo_clk";
+			blsp1_spi1_mo_clk_active: blsp1_spi1_mo_clk_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+			
+			blsp1_spi1_mo_clk_sleep: blsp1_spi1_mo_clk_sleep {
+					drive-strength = <2>;
+					bias-disable;
+			};
+		};
+		
+		blsp1_spi1_mi {
+			qcom,pins = <&gp 1>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi1_mi";
+			blsp1_spi1_mi_active: blsp1_spi1_mi_active {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		    
+		    blsp1_spi1_mi_sleep: blsp1_spi1_mi_sleep {
+				drive-strength = <2>;
+				bias-pull-up;
+			};
+		};
+		
+		blsp1_spi1_cs {
+			qcom,pins = <&gp 2>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "blsp1_spi1_cs";
+			blsp1_spi1_cs_active: blsp1_spi1_cs_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+			
+			blsp1_spi1_cs_sleep: blsp1_spi1_cs_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		
+		blsp1_spi2_mo_cs_clk {
+			qcom,pins = <&gp 4>, <&gp 6>, <&gp 7>;
+			qcom,num-grp-pins = <3>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi2_mo_cs_clk";
+			blsp1_spi2_mo_cs_clk_active: blsp1_spi2_mo_cs_clk_active {
+				drive-strength = <4>;
+				bias-disable;
+			};
+			
+			blsp1_spi2_mo_cs_clk_sleep: blsp1_spi2_mo_cs_clk_sleep {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp1_spi2_mi {
+			qcom,pins = <&gp 5>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi2_mi";
+			blsp1_spi2_mi_active: blsp1_spi2_mi_active {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+			
+			blsp1_spi2_mi_sleep: blsp1_spi2_mi_sleep {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp1_spi3_active_mo{
+			qcom,pins = <&gp 8>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi3_active_mo";
+			
+			blsp1_spi3_mo_active: blsp1_spi3_mo_active {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp1_spi3_sleep_mo{
+			qcom,pins = <&gp 8>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "blsp1_spi3_sleep_mo";
+			
+			blsp1_spi3_mo_sleep: blsp1_spi3_mo_sleep {
+				drive-strength = <4>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp1_spi3_active_mi{
+			qcom,pins = <&gp 9>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi3_active_mi";
+			
+			blsp1_spi3_mi_active: blsp1_spi3_mi_active {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp1_spi3_sleep_mi{
+			qcom,pins = <&gp 9>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "blsp1_spi3_sleep_mi";
+			
+			blsp1_spi3_mi_sleep: blsp1_spi3_mi_sleep {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp1_spi3_active_cs_clk {
+			qcom,pins = <&gp 10>, <&gp 11>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+			label = "blsp1_spi3_active_cs_clk";
+
+			blsp1_spi3_cs_clk_active: blsp1_spi3_cs_clk_active {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp1_spi3_sleep_cs_clk {
+			qcom,pins = <&gp 10>, <&gp 11>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <0>;
+			label = "blsp1_spi3_sleep_cs_clk";
+
+			blsp1_spi3_cs_clk_sleep: blsp1_spi3_cs_clk_sleep {
+				drive-strength = <4>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp1_spi4 {
+			qcom,pins = <&gp 17>, <&gp 18>, <&gp 19>, <&gp 20>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <2>;
+			label = "blsp1_spi4";
+
+			blsp1_spi4_active: blsp1_spi4_active {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp1_spi4_sleep: blsp1_spi4_sleep {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+
+		blsp1_spi5_mo_mi_cs {
+			qcom,pins = <&gp 21>, <&gp 22>, <&gp 23>;
+			qcom,num-grp-pins = <3>;
+			qcom,pin-func = <2>;
+			label = "blsp1_spi5_mo_mi_cs";
+
+			blsp1_spi5_active_mo_mi_cs: blsp1_spi5_active_mo_mi_cs {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp1_spi5_sleep_mo_mi_cs: blsp1_spi5_sleep_mo_mi_cs {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+		
+		blsp1_spi5_clk {
+			qcom,pins = <&gp 24>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+			label = "blsp1_spi5_clk";
+
+			blsp1_spi5_active_clk: blsp1_spi5_active_clk {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp1_spi5_sleep_clk: blsp1_spi5_sleep_clk {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+		
+		blsp1_spi6_mo {
+			qcom,pins = <&gp 25>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+			label = "blsp1_spi6_mo";
+
+			blsp1_spi6_active_mo: blsp1_spi6_active_mo {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp1_spi6_sleep_mo: blsp1_spi6_sleep_mo {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+		
+		blsp1_spi6_mi {
+			qcom,pins = <&gp 26>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+			label = "blsp1_spi6_mi";
+
+			blsp1_spi6_active_mi: blsp1_spi6_active_mi {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp1_spi6_sleep_mi: blsp1_spi6_sleep_mi {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+		
+		blsp1_spi6_cs_clk {
+			qcom,pins = <&gp 27>, <&gp 28>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <1>;
+			label = "blsp1_spi6_cs_clk";
+
+			blsp1_spi6_active_cs_clk: blsp1_spi6_active_cs_clk {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp1_spi6_sleep_cs_clk: blsp1_spi6_sleep_cs_clk {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+
+		blsp2_spi7 {
+			qcom,pins = <&gp 41>, <&gp 42>, <&gp 43>, <&gp 44>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <1>;
+			label = "blsp2_spi7";
+
+			blsp2_spi7_active: blsp2_spi7_active {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp2_spi7_sleep: blsp2_spi7_sleep {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+
+		blsp2_spi8 {
+			qcom,pins = <&gp 45>, <&gp 46>, <&gp 47>, <&gp 48>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <1>;
+			label = "blsp2_spi8";
+
+			blsp2_spi8_active: blsp2_spi8_active {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp2_spi8_sleep: blsp2_spi8_sleep {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+
+		blsp2_spi9_mo {
+			qcom,pins = <&gp 49>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+			label = "blsp2_spi9_mo";
+
+			blsp2_spi9_active_mo: blsp2_spi9_active_mo {
+					       drive-strength = <8>;
+					       bias-disable;
+		        };
+
+			blsp2_spi9_sleep_mo: blsp2_spi9_sleep_mo {
+					       drive-strength = <8>;
+					       bias-disable;
+		        };
+		};
+
+		blsp2_spi9_mi {
+			qcom,pins = <&gp 50>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <2>;
+			label = "blsp2_spi9_mi";
+
+			blsp2_spi9_active_mi: blsp2_spi9_active_mi {
+					       drive-strength = <4>;
+					       bias-pull-down;
+		        };
+
+			blsp2_spi9_sleep_mi: blsp2_spi9_sleep_mi {
+					       drive-strength = <4>;
+					       bias-pull-down;
+		        };
+		};
+
+		blsp2_spi9_cs_clk {
+			qcom,pins = <&gp 51>, <&gp 52>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+			label = "blsp2_spi9_cs_clk";
+
+			blsp2_spi9_active_cs_clk: blsp2_spi9_active_cs_clk {
+					       drive-strength = <8>;
+					       bias-disable;
+		        };
+
+			blsp2_spi9_sleep_cs_clk: blsp2_spi9_sleep_cs_clk {
+					       drive-strength = <8>;
+					       bias-disable;
+		        };
+		};
+
+		blsp2_spi10_mo_active {
+			qcom,pins = <&gp 53>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+			label = "blsp2_spi10_mo_active";
+
+			blsp2_spi10_active_mo: spi_blsp10_active_mo {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_spi10_mi_active {
+			qcom,pins = <&gp 54>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+			label = "blsp2_spi10_mi_active";
+
+			blsp2_spi10_active_mi: blsp2_spi10_active_mi {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp2_spi10_cs_clk_active {
+			qcom,pins = <&gp 55>, <&gp 56>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+			label = "blsp2_spi10_cs_clk_active";
+
+			blsp2_spi10_active_cs_clk: blsp2_spi10_active_cs_clk {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_spi10_mo_sleep {
+			qcom,pins = <&gp 53>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+			label = "blsp2_spi10_mo_sleep";
+
+			blsp2_spi10_sleep_mo: spi_blsp10_sleep_mo {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_spi10_mi_sleep {
+			qcom,pins = <&gp 54>;
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <3>;
+			label = "blsp2_spi10_mi_sleep";
+
+			blsp2_spi10_sleep_mi: blsp2_spi10_sleep_mi {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+		
+		blsp2_spi10_cs_clk_sleep {
+			qcom,pins = <&gp 55>, <&gp 56>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+			label = "blsp2_spi10_cs_clk_sleep";
+
+			blsp2_spi10_sleep_cs_clk: blsp2_spi10_sleep_cs_clk {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		blsp2_spi11_mo_mi {
+			qcom,pins = <&gp 81>, <&gp 82>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <2>;
+			label = "blsp2_spi11_mo_mi";
+
+			blsp2_spi11_active_mo_mi: blsp2_spi11_active_mo_mi {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp2_spi11_sleep_mo_mi: blsp2_spi11_sleep_mo_mi {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+
+		blsp2_spi11_cs_clk {
+			qcom,pins = <&gp 83>, <&gp 84>;
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <1>;
+			label = "blsp2_spi11_cs_clk";
+
+			blsp2_spi_11_active_cs_clk: blsp2_spi11_active_cs_clk {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp2_spi_11_sleep_cs_clk: blsp2_spi11_sleep_cs_clk {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+		
+		blsp2_spi12 {
+			qcom,pins = <&gp 85>, <&gp 86>, <&gp 87>, <&gp 88>;
+			qcom,num-grp-pins = <4>;
+			qcom,pin-func = <1>;
+			label = "blsp2_spi12";
+
+			blsp2_spi_12_active: blsp2_spi12_active {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+
+			blsp2_spi_12_sleep: blsp2_spi12_sleep {
+					       drive-strength = <6>;
+					       bias-pull-up;
+		        };
+		};
+
+		pmx_i2c_1 {
+			qcom,pins = <&gp 2>, <&gp 3>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+			label = "pmx_i2c_1";
+
+			i2c_1_active: i2c_1_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_1_sleep: i2c_1_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_2 {
+			qcom,pins = <&gp 6>, <&gp 7>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+			label = "pmx_i2c_2";
+
+			i2c_2_active: i2c_2_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_2_sleep: i2c_2_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_3 {
+			qcom,pins = <&gp 10>, <&gp 11>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <4>;
+			label = "pmx_i2c_3";
+
+			i2c_3_active: i2c_3_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_3_sleep: i2c_3_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		
+		pmx_i2c_4_sda_scl_fnc1 {
+			qcom,pins = <&gp 17>, <&gp 18>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <1>;
+			label = "pmx_i2c_4_sda_scl_fnc1";
+
+			i2c_4_active_sda_scl_fnc1: i2c_4_active_sda_scl_fnc1 {
+				drive-strength = <4>;
+				bias-disable;
+			};
+
+			i2c_4_sleep_sda_scl_fnc1: i2c_4_sleep_sda_scl_fnc1 {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+		
+		pmx_i2c_4_sda_scl_fnc4 {
+			qcom,pins = <&gp 19>, <&gp 20>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <4>;
+			label = "pmx_i2c_blsp4_sda_scl";
+
+			i2c_4_active_sda_scl_fnc4: i2c_4_active_sda_scl_fnc4 {
+				drive-strength = <4>;
+				bias-disable;
+			};
+
+			i2c_4_sleep_sda_scl_fnc4: i2c_4_sleep_sda_scl_fnc4 {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_4_sda_fnc3_sleep {
+			qcom,pins = <&gp 19>; /* SDA */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "pmx_i2c_blsp4_sda_fnc3";
+
+			i2c_4_sleep_sda_fnc3: i2c_4_sleep_sda_fnc3 {
+				drive-strength = <4>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_4_scl_fnc4_sleep {
+			qcom,pins = <&gp 20>; /* SCL */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "pmx_i2c_blsp4_scl_fnc4";
+
+			i2c_4_sleep_scl_fnc4: i2c_4_sleep_scl_fnc4 {
+				drive-strength = <4>;
+				bias-disable;
+				input-enable;
+			};
+		};
+
+		pmx_i2c_5_sda {
+			qcom,pins = <&gp 23>; /* SDA */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "pmx_i2c_5_sda";
+
+			i2c_5_active_sda: i2c_5_active_sda {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+
+			i2c_5_sleep_sda: i2c_5_sleep_sda {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+		pmx_i2c_5_scl {
+			qcom,pins = <&gp 24>; /* SCL */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "pmx_i2c_5_scl";
+
+			i2c_5_active_scl: i2c_5_active_scl {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+
+			i2c_5_sleep_scl: i2c_5_sleep_scl {
+				drive-strength = <2>;
+				bias-pull-down;
+			};
+		};
+
+		pmx_i2c_6_func4_active {
+			qcom,pins = <&gp 27>; /* SDA */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <4>;
+			label = "pmx_i2c_6_func4_active";
+
+			i2c_6_sda_active: i2c_6_sda_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_6_func0_sleep {
+			qcom,pins = <&gp 27>; /* SDA */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "pmx_i2c_6_func0_sleep";
+
+			i2c_6_sda_sleep: i2c_6_sda_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_6 {
+			qcom,pins = <&gp 28>; /* SCL */
+			qcom,num-grp-pins = <1>;
+			qcom,pin-func = <0>;
+			label = "pmx_i2c_6";
+
+			i2c_6_scl_active: i2c_6_scl_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_6_scl_sleep: i2c_6_scl_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_7 {
+			qcom,pins = <&gp 43>, <&gp 44>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+			label = "pmx_i2c_7";
+
+			i2c_7_active: i2c_7_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_7_sleep: i2c_7_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_8 {
+			qcom,pins = <&gp 47>, <&gp 48>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+			label = "pmx_i2c_8";
+
+			i2c_8_active: i2c_8_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_8_sleep: i2c_8_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_9 {
+			qcom,pins = <&gp 51>, <&gp 52>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <4>;
+			label = "pmx_i2c_9";
+
+			i2c_9_active: i2c_9_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_9_sleep: i2c_9_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_10 {
+			qcom,pins = <&gp 55>, <&gp 56>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <4>;
+			label = "pmx_i2c_10";
+
+			i2c_10_active: i2c_10_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_10_sleep: i2c_10_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_11 {
+			qcom,pins = <&gp 83>, <&gp 84>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+			label = "pmx_i2c_11";
+
+			i2c_11_active: i2c_11_active {
+				drive-strength = <6>;
+				bias-disable;
+			};
+
+			i2c_11_sleep: i2c_11_sleep {
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		pmx_i2c_12 {
+			qcom,pins = <&gp 87>, <&gp 88>; /* SDA, SCL */
+			qcom,num-grp-pins = <2>;
+			qcom,pin-func = <3>;
+			label = "pmx_i2c_12";
+
+			i2c_12_active: i2c_12_active {
+				drive-strength = <2>;
+				bias-disable;
+			};
+
+			i2c_12_sleep: i2c_12_sleep {
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+		
+	};
+};
