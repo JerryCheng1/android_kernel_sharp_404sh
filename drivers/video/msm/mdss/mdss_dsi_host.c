@@ -184,7 +184,7 @@ void mdss_dsi_ctrl_init(struct device *ctrl_dev,
 	if (ctrl->mdss_util->register_irq(ctrl->dsi_hw))
 		pr_err("%s: mdss_register_irq failed.\n", __func__);
 
-	pr_debug("%s: ndx=%d base=%p\n", __func__, ctrl->ndx, ctrl->ctrl_base);
+	pr_debug("%s: ndx=%d base=%pK\n", __func__, ctrl->ndx, ctrl->ctrl_base);
 
 	init_completion(&ctrl->dma_comp);
 	init_completion(&ctrl->mdp_comp);
@@ -2388,7 +2388,7 @@ void mdss_dsi_phy_dln0_err_clear(struct mdss_dsi_ctrl_pdata *ctrl)
 	u32 status;
 	unsigned char *base;
 
-	pr_debug("LCDDBG:[%s] enter - (ctrl=%p)\n", __func__, ctrl);
+	pr_debug("LCDDBG:[%s] enter - (ctrl=%pK)\n", __func__, ctrl);
 
 	base = ctrl->ctrl_base;
 
@@ -2417,10 +2417,10 @@ void mdss_dsi_phy_dln0_err_ctrl(struct mdss_dsi_ctrl_pdata *ctrl, bool onoff)
 	unsigned char *base;
 	int nval;
 
-	pr_debug("LCDDBG:[%s] enter - (ctrl=%p onoff=%d)\n", __func__, ctrl, onoff);
+	pr_debug("LCDDBG:[%s] enter - (ctrl=%pK onoff=%d)\n", __func__, ctrl, onoff);
 
 	if (!ctrl) {
-		pr_err("LCDERR:[%s] ctrl=%p", __func__, ctrl);
+		pr_err("LCDERR:[%s] ctrl=%pK", __func__, ctrl);
 		return;
 	}
 

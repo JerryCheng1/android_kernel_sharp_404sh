@@ -1388,7 +1388,7 @@ int msm_isp_axi_reset(struct vfe_device *vfe_dev,
 	uint32_t bufq_handle = 0, bufq_id = 0;
 
 	if (!reset_cmd) {
-		pr_err("%s: NULL pointer reset cmd %p\n", __func__, reset_cmd);
+		pr_err("%s: NULL pointer reset cmd %pK\n", __func__, reset_cmd);
 		rc = -1;
 		return rc;
 	}
@@ -1418,7 +1418,7 @@ int msm_isp_axi_reset(struct vfe_device *vfe_dev,
 			bufq = vfe_dev->buf_mgr->ops->get_bufq(vfe_dev->buf_mgr,
 				bufq_handle);
 			if (!bufq) {
-				pr_err("%s: bufq null %p by handle %x\n",
+				pr_err("%s: bufq null %pK by handle %x\n",
 					__func__, bufq, bufq_handle);
 				continue;
 			}

@@ -396,7 +396,7 @@ static int mdss_shdisp_kick_collect_cmd(void)
 	struct dcs_cmd_req cmdreq;
 
 	if (!mdss_dsi_ctrl) {
-		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%p", __func__, mdss_dsi_ctrl);
+		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%pK", __func__, mdss_dsi_ctrl);
 		return SHDISP_RESULT_FAILURE;
 	}
 
@@ -446,7 +446,7 @@ static int mdss_shdisp_is_cmdmode_eng_on(void)
 	int ret = 0;
 
 	if (!mdss_dsi_ctrl) {
-		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%p", __func__, mdss_dsi_ctrl);
+		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%pK", __func__, mdss_dsi_ctrl);
 		return 0;
 	}
 	mdss_shdisp_clk_ctrl(true);
@@ -472,7 +472,7 @@ static void mdss_shdisp_cmdmode_eng_ctrl(int enable)
 	int mode;
 
 	if (!mdss_dsi_ctrl) {
-		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%p", __func__, mdss_dsi_ctrl);
+		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%pK", __func__, mdss_dsi_ctrl);
 		return;
 	}
 
@@ -525,7 +525,7 @@ int mdss_shdisp_host_dsi_tx(int commit, struct shdisp_dsi_cmd_desc * shdisp_cmds
 	int ret = 0;
 	mdss_shdisp_lock_host_dsi_cmd();
 	if (!mdss_dsi_ctrl) {
-		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%p", __func__, mdss_dsi_ctrl);
+		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%pK", __func__, mdss_dsi_ctrl);
 		mdss_shdisp_unlock_host_dsi_cmd();
 		return SHDISP_RESULT_FAILURE;
 	}
@@ -565,7 +565,7 @@ int mdss_shdisp_host_dsi_rx(struct shdisp_dsi_cmd_desc * cmds, unsigned char * r
 	mdss_shdisp_lock_host_dsi_cmd();
 
 	if ( !mdss_dsi_ctrl ) {
-		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%p", __func__, mdss_dsi_ctrl);
+		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%pK", __func__, mdss_dsi_ctrl);
 		mdss_shdisp_unlock_host_dsi_cmd();
 		return SHDISP_RESULT_FAILURE;
 	}
@@ -789,13 +789,13 @@ static int mdss_shdisp_mdp_cmd_clk_ctrl(bool onoff)
 
 	ret = mdss_mdp_cmd_cancel_clk_work(pctl);
 	if (ret) {
-		pr_err("LCDERR:[%s] failed to cancel DSI clock work. (ret=%d mdp=%p)\n", __func__, ret, pctl);
+		pr_err("LCDERR:[%s] failed to cancel DSI clock work. (ret=%d mdp=%pK)\n", __func__, ret, pctl);
 		return ret;
 	}
 
 	ret = mdss_mdp_cmd_clk_ctrl(pctl, onoff);
 	if (ret) {
-		pr_err("LCDERR:[%s] failed to control DSI clock. (ret=%d mdp=%p)\n", __func__, ret, pctl);
+		pr_err("LCDERR:[%s] failed to control DSI clock. (ret=%d mdp=%pK)\n", __func__, ret, pctl);
 		return ret;
 	}
 
@@ -986,7 +986,7 @@ int mdss_shdisp_set_lp00_mode(int enable)
 	static u32 backup = 0;
 
 	if (!mdss_dsi_ctrl) {
-		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%p", __func__, mdss_dsi_ctrl);
+		pr_err("LCDERR: %s mdss_dsi_ctrl=0x%pK", __func__, mdss_dsi_ctrl);
 		return SHDISP_RESULT_FAILURE;
 	}
 
@@ -994,7 +994,7 @@ int mdss_shdisp_set_lp00_mode(int enable)
 	ctrl_pdata = container_of(mdss_panel_data, struct mdss_dsi_ctrl_pdata,
 			panel_data);
 	dsi_ctrl = MIPI_INP((ctrl_pdata->ctrl_base) + 0x0004);
-	pr_debug("%s: addr=0x%p INP dsi_ctrl=0x%02X\n", __func__, ((ctrl_pdata->ctrl_base) + 0x0004), dsi_ctrl);
+	pr_debug("%s: addr=0x%pK INP dsi_ctrl=0x%02X\n", __func__, ((ctrl_pdata->ctrl_base) + 0x0004), dsi_ctrl);
 	if (!enable) {
 		backup = dsi_ctrl;
 		dsi_ctrl = 0x000;
@@ -1002,7 +1002,7 @@ int mdss_shdisp_set_lp00_mode(int enable)
 		dsi_ctrl |= backup;
 		backup = 0;
 	}
-	pr_debug("%s: addr=0x%p OUTP dsi_ctrl=0x%02X\n", __func__, ((ctrl_pdata->ctrl_base) + 0x0004), dsi_ctrl);
+	pr_debug("%s: addr=0x%pK OUTP dsi_ctrl=0x%02X\n", __func__, ((ctrl_pdata->ctrl_base) + 0x0004), dsi_ctrl);
 	MIPI_OUTP((ctrl_pdata->ctrl_base) + 0x0004, dsi_ctrl);
 	wmb();
 	if (enable && (dsi_ctrl & BIT(0))) {

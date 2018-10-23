@@ -102,7 +102,7 @@ int mdss_diag_mipi_check(struct mdp_mipi_check_param *mipi_check_param,
 
 	pr_debug("%s: called\n", __func__);
 	if (!ctrl_pdata) {
-		pr_err("LCDERR: %s ctrl_pdata=0x%p", __func__, ctrl_pdata);
+		pr_err("LCDERR: %s ctrl_pdata=0x%pK", __func__, ctrl_pdata);
 		return -ENXIO;
 	}
 

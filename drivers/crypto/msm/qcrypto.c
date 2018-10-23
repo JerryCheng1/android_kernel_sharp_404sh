@@ -1878,12 +1878,12 @@ static int _qcrypto_process_aead(struct  crypto_engine *pengine,
 			 * include  assoicated data, ciphering data stream,
 			 * generated MAC, and CCM padding.
 			 */
-			if ((MAX_ALIGN_SIZE * 2 > ULONG_MAX - req->assoclen) ||
+			if ((MAX_ALIGN_SIZE * 2 > UINT_MAX - req->assoclen) ||
 				((MAX_ALIGN_SIZE * 2 + req->assoclen) >
-						ULONG_MAX - qreq.ivsize) ||
+						UINT_MAX - qreq.ivsize) ||
 				((MAX_ALIGN_SIZE * 2 + req->assoclen
 					+ qreq.ivsize)
-						> ULONG_MAX - req->cryptlen)) {
+						> UINT_MAX - req->cryptlen)) {
 				pr_err("Integer overflow on aead req length.\n");
 				return -EINVAL;
 			}
@@ -3507,6 +3507,7 @@ static int _sha1_hmac_setkey(struct crypto_ahash *tfm, const u8 *key,
 							unsigned int len)
 {
 	struct qcrypto_sha_ctx *sha_ctx = crypto_tfm_ctx(&tfm->base);
+	int ret = 0;
 	memset(&sha_ctx->authkey[0], 0, SHA1_BLOCK_SIZE);
 	if (len <= SHA1_BLOCK_SIZE) {
 		memcpy(&sha_ctx->authkey[0], key, len);
@@ -3514,16 +3515,19 @@ static int _sha1_hmac_setkey(struct crypto_ahash *tfm, const u8 *key,
 	} else {
 		sha_ctx->alg = QCE_HASH_SHA1;
 		sha_ctx->diglen = SHA1_DIGEST_SIZE;
-		_sha_hmac_setkey(tfm, key, len);
+		ret = _sha_hmac_setkey(tfm, key, len);
+		if (ret)
+			pr_err("SHA1 hmac setkey failed\n");
 		sha_ctx->authkey_in_len = SHA1_BLOCK_SIZE;
 	}
-	return 0;
+	return ret;
 }
 
 static int _sha256_hmac_setkey(struct crypto_ahash *tfm, const u8 *key,
 							unsigned int len)
 {
 	struct qcrypto_sha_ctx *sha_ctx = crypto_tfm_ctx(&tfm->base);
+	int ret = 0;
 
 	memset(&sha_ctx->authkey[0], 0, SHA256_BLOCK_SIZE);
 	if (len <= SHA256_BLOCK_SIZE) {
@@ -3532,11 +3536,13 @@ static int _sha256_hmac_setkey(struct crypto_ahash *tfm, const u8 *key,
 	} else {
 		sha_ctx->alg = QCE_HASH_SHA256;
 		sha_ctx->diglen = SHA256_DIGEST_SIZE;
-		_sha_hmac_setkey(tfm, key, len);
+		ret = _sha_hmac_setkey(tfm, key, len);
+		if (ret)
+			pr_err("SHA256 hmac setkey failed\n");
 		sha_ctx->authkey_in_len = SHA256_BLOCK_SIZE;
 	}
 
-	return 0;
+	return ret;
 }
 
 static int _sha_hmac_init_ihash(struct ahash_request *req,
@@ -5045,9 +5051,9 @@ static ssize_t _debug_stats_read(struct file *file, char __user *buf,
 
 	len = _disp_stats(qcrypto);
 
-	rc = simple_read_from_buffer((void __user *) buf, len,
+	if (len <= count)
+		rc = simple_read_from_buffer((void __user *) buf, len,
 			ppos, (void *) _debug_read_buf, len);
-
 	return rc;
 }
 

@@ -693,6 +693,8 @@ static int msm_pcm_playback_close(struct snd_pcm_substream *substream)
 	msm_pcm_routing_dereg_phy_stream(soc_prtd->dai_link->be_id,
 						SNDRV_PCM_STREAM_PLAYBACK);
 	kfree(prtd);
+	runtime->private_data = NULL;
+
 	return 0;
 }
 
@@ -737,7 +739,7 @@ static int msm_pcm_capture_copy(struct snd_pcm_substream *substream,
 		pr_debug("%s: pcm stopped in_count 0\n", __func__);
 		return 0;
 	}
-	pr_debug("Checking if valid buffer is available...%p\n",
+	pr_debug("Checking if valid buffer is available...%pK\n",
 						data);
 	data = q6asm_is_cpu_buf_avail(OUT, prtd->audio_client, &size, &idx);
 	bufptr = data;
@@ -894,7 +896,7 @@ static int msm_pcm_hw_params(struct snd_pcm_substream *substream,
 	if (buf == NULL || buf[0].data == NULL)
 		return -ENOMEM;
 
-	pr_debug("%s:buf = %p\n", __func__, buf);
+	pr_debug("%s:buf = %pK\n", __func__, buf);
 	dma_buf->dev.type = SNDRV_DMA_TYPE_DEV;
 	dma_buf->dev.dev = substream->pcm->card->dev;
 	dma_buf->private_data = NULL;
