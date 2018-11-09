@@ -97,15 +97,7 @@
 #include "audit.h"
 #include "avc_ss.h"
 
-#ifdef CONFIG_SECURITY_MIYABI
-#include "miyabi.h"
-#endif /* CONFIG_SECURITY_MIYABI */
-
 #define NUM_SEL_MNT_OPTS 5
-
-#ifdef CONFIG_SECURITY_MIYABI
-#include "../capability.c"
-#endif /* CONFIG_SECURITY_MIYABI */
 
 extern struct security_operations *security_ops;
 
@@ -137,12 +129,7 @@ static int __init selinux_enabled_setup(char *str)
 }
 __setup("selinux=", selinux_enabled_setup);
 #else
-
-#ifdef CONFIG_SECURITY_MIYABI
-const int selinux_enabled = 1;
-#else /* CONFIG_SECURITY_MIYABI */
 int selinux_enabled = 1;
-#endif /* CONFIG_SECURITY_MIYABI */
 #endif
 
 static struct kmem_cache *sel_inode_cache;
@@ -2115,12 +2102,6 @@ static int selinux_bprm_set_creds(struct linux_binprm *bprm)
 	struct inode *inode = file_inode(bprm->file);
 	int rc;
 
-#ifdef CONFIG_SECURITY_MIYABI
-	rc = miyabi_bprm_set_creds(bprm);
-	if (rc)
-		return rc;
-#endif
-
 	rc = cap_bprm_set_creds(bprm);
 	if (rc)
 		return rc;
@@ -2617,12 +2598,6 @@ static int selinux_mount(const char *dev_name,
 {
 	const struct cred *cred = current_cred();
 
-#ifdef CONFIG_SECURITY_MIYABI
-	int miyabi_ret = 0;
-	miyabi_ret = miyabi_sb_mount(dev_name, path, type, flags, data);
-	if (miyabi_ret) return miyabi_ret;
-#endif
-
 	if (flags & MS_REMOUNT)
 		return superblock_has_perm(cred, path->dentry->d_sb,
 					   FILESYSTEM__REMOUNT, NULL);
@@ -2633,13 +2608,6 @@ static int selinux_mount(const char *dev_name,
 static int selinux_umount(struct vfsmount *mnt, int flags)
 {
 	const struct cred *cred = current_cred();
-
-#ifdef CONFIG_SECURITY_MIYABI
-	int rc;
-	rc = miyabi_sb_umount(mnt, flags);
-	if (rc)
-		return rc;
-#endif
 
 	return superblock_has_perm(cred, mnt->mnt_sb,
 				   FILESYSTEM__UNMOUNT, NULL);
@@ -3412,13 +3380,6 @@ static int selinux_file_open(struct file *file, const struct cred *cred)
 	struct file_security_struct *fsec;
 	struct inode_security_struct *isec;
 	int ret;
-
-#ifdef CONFIG_SECURITY_MIYABI
-	int rc;
-	rc = miyabi_file_open(file, cred);
-	if (rc)
-		return rc;
-#endif
 
 	ret = pft_file_open(file, cred);
 	if (ret < 0)
@@ -4249,13 +4210,6 @@ static int selinux_socket_getpeername(struct socket *sock)
 static int selinux_socket_setsockopt(struct socket *sock, int level, int optname)
 {
 	int err;
-
-#ifdef CONFIG_SECURITY_MIYABI
-	int rc;
-	rc = miyabi_socket_setsockopt(sock, level, optname);
-	if (rc)
-		return rc;
-#endif
 
 	err = sock_has_perm(current, sock->sk, SOCKET__SETOPT);
 	if (err)
@@ -5825,11 +5779,7 @@ static int selinux_key_getsecurity(struct key *key, char **_buffer)
 
 #endif
 
-#ifdef CONFIG_SECURITY_MIYABI
-const struct security_operations selinux_ops = {
-#else /* CONFIG_SECURITY_MIYABI */
 static struct security_operations selinux_ops = {
-#endif /* CONFIG_SECURITY_MIYABI */
 	.name =				"selinux",
 
 	.binder_set_context_mgr =	selinux_binder_set_context_mgr,
@@ -5845,17 +5795,11 @@ static struct security_operations selinux_ops = {
 	.quotactl =			selinux_quotactl,
 	.quota_on =			selinux_quota_on,
 	.syslog =			selinux_syslog,
-#ifdef CONFIG_SECURITY_MIYABI
-	.settime = 			cap_settime,
-#endif
 	.vm_enough_memory =		selinux_vm_enough_memory,
 
 	.netlink_send =			selinux_netlink_send,
 
 	.bprm_set_creds =		selinux_bprm_set_creds,
-#ifdef CONFIG_SECURITY_MIYABI
-	.bprm_check_security = 	cap_bprm_check_security,
-#endif
 	.bprm_committing_creds =	selinux_bprm_committing_creds,
 	.bprm_committed_creds =		selinux_bprm_committed_creds,
 	.bprm_secureexec =		selinux_bprm_secureexec,
@@ -5869,28 +5813,10 @@ static struct security_operations selinux_ops = {
 	.sb_statfs =			selinux_sb_statfs,
 	.sb_mount =			selinux_mount,
 	.sb_umount =			selinux_umount,
-#ifdef CONFIG_SECURITY_MIYABI
-	.sb_pivotroot = 		miyabi_sb_pivotroot,
-#endif
 	.sb_set_mnt_opts =		selinux_set_mnt_opts,
 	.sb_clone_mnt_opts =		selinux_sb_clone_mnt_opts,
 	.sb_parse_opts_str = 		selinux_parse_opts_str,
 
-#ifdef CONFIG_SECURITY_MIYABI
-#ifdef CONFIG_SECURITY_PATH
-	.path_unlink =			cap_path_unlink,
-	.path_mkdir =			cap_path_mkdir,
-	.path_rmdir =			cap_path_rmdir,
-	.path_mknod = 			cap_path_mknod,
-	.path_truncate =		cap_path_truncate,
-	.path_symlink =			miyabi_path_symlink,
-	.path_link =			cap_path_link,
-	.path_rename =			cap_path_rename,
-	.path_chmod =			miyabi_path_chmod,
-	.path_chown =			cap_path_chown,
-	.path_chroot =			miyabi_path_chroot,
-#endif /* CONFIG_SECURITY_PATH */
-#endif /* CONFIG_SECURITY_MIYABI */
 
 	.inode_alloc_security =		selinux_inode_alloc_security,
 	.inode_free_security =		selinux_inode_free_security,
@@ -5914,10 +5840,6 @@ static struct security_operations selinux_ops = {
 	.inode_getxattr =		selinux_inode_getxattr,
 	.inode_listxattr =		selinux_inode_listxattr,
 	.inode_removexattr =		selinux_inode_removexattr,
-#ifdef CONFIG_SECURITY_MIYABI
-	.inode_need_killpriv = 		cap_inode_need_killpriv,
-	.inode_killpriv = 		cap_inode_killpriv,
-#endif
 	.inode_getsecurity =		selinux_inode_getsecurity,
 	.inode_setsecurity =		selinux_inode_setsecurity,
 	.inode_listsecurity =		selinux_inode_listsecurity,
@@ -5941,9 +5863,6 @@ static struct security_operations selinux_ops = {
 	.allow_merge_bio =		selinux_allow_merge_bio,
 
 	.task_create =			selinux_task_create,
-#ifdef CONFIG_SECURITY_MIYABI
-	.task_free = 			cap_task_free,
-#endif
 	.cred_alloc_blank =		selinux_cred_alloc_blank,
 	.cred_free =			selinux_cred_free,
 	.cred_prepare =			selinux_cred_prepare,
@@ -5951,12 +5870,6 @@ static struct security_operations selinux_ops = {
 	.kernel_act_as =		selinux_kernel_act_as,
 	.kernel_create_files_as =	selinux_kernel_create_files_as,
 	.kernel_module_request =	selinux_kernel_module_request,
-#ifdef CONFIG_SECURITY_MIYABI
-	.kernel_module_from_file =	cap_kernel_module_from_file,
-#endif
-#ifdef CONFIG_SECURITY_MIYABI
-	.task_fix_setuid = 		miyabi_task_fix_setuid,
-#endif
 	.task_setpgid =			selinux_task_setpgid,
 	.task_getpgid =			selinux_task_getpgid,
 	.task_getsid =			selinux_task_getsid,
@@ -5970,9 +5883,6 @@ static struct security_operations selinux_ops = {
 	.task_movememory =		selinux_task_movememory,
 	.task_kill =			selinux_task_kill,
 	.task_wait =			selinux_task_wait,
-#ifdef CONFIG_SECURITY_MIYABI
-	.task_prctl = 			cap_task_prctl,
-#endif
 	.task_to_inode =		selinux_task_to_inode,
 
 	.ipc_permission =		selinux_ipc_permission,
@@ -6081,12 +5991,10 @@ static struct security_operations selinux_ops = {
 
 static __init int selinux_init(void)
 {
-#ifndef CONFIG_SECURITY_MIYABI
 	if (!security_module_enable(&selinux_ops)) {
 		selinux_enabled = 0;
 		return 0;
 	}
-#endif
 
 	if (!selinux_enabled) {
 		printk(KERN_INFO "SELinux:  Disabled at boot.\n");
@@ -6105,10 +6013,8 @@ static __init int selinux_init(void)
 					    0, SLAB_PANIC, NULL);
 	avc_init();
 
-#ifndef CONFIG_SECURITY_MIYABI
 	if (register_security(&selinux_ops))
 		panic("SELinux: Unable to register with kernel.\n");
-#endif
 
 	if (selinux_enforcing)
 		printk(KERN_DEBUG "SELinux:  Starting in enforcing mode\n");
@@ -6208,7 +6114,6 @@ out:
 
 __initcall(selinux_nf_ip_init);
 
-#ifndef CONFIG_SECURITY_MIYABI
 #ifdef CONFIG_SECURITY_SELINUX_DISABLE
 static void selinux_nf_ip_exit(void)
 {
@@ -6220,19 +6125,15 @@ static void selinux_nf_ip_exit(void)
 #endif	/* IPV6 */
 }
 #endif
-#endif /* !CONFIG_SECURITY_MIYABI */
 
 #else /* CONFIG_NETFILTER */
 
-#ifndef CONFIG_SECURITY_MIYABI
 #ifdef CONFIG_SECURITY_SELINUX_DISABLE
 #define selinux_nf_ip_exit()
 #endif
-#endif /* !CONFIG_SECURITY_MIYABI */
 
 #endif /* CONFIG_NETFILTER */
 
-#ifndef CONFIG_SECURITY_MIYABI
 #ifdef CONFIG_SECURITY_SELINUX_DISABLE
 static int selinux_disabled;
 
@@ -6267,4 +6168,3 @@ int selinux_disable(void)
 	return 0;
 }
 #endif
-#endif /* !CONFIG_SECURITY_MIYABI */
