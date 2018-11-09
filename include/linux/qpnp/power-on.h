@@ -69,4 +69,8 @@ int qpnp_pon_wd_config(bool enable)
 }
 #endif
 
+#ifdef CONFIG_ARCH_PA29
+extern bool sharp_display_status;
+#endif
+
 #endif

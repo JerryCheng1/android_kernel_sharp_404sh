@@ -26,6 +26,9 @@
 #include <linux/input.h>
 #include <linux/log2.h>
 #include <linux/qpnp/power-on.h>
+#ifdef CONFIG_ARCH_PA29
+#include <linux/reboot.h>
+#endif
 
 #define PMIC_VER_8941           0x01
 #define PMIC_VERSION_REG        0x0105
@@ -164,6 +167,7 @@ struct qpnp_pon {
 static struct qpnp_pon *sys_reset_dev;
 static DEFINE_MUTEX(spon_list_mutex);
 static LIST_HEAD(spon_dev_list);
+bool sharp_display_status; /* mdsss_mdp: display_on flg */
 
 static u32 s1_delay[PON_S1_COUNT_MAX + 1] = {
 	0 , 32, 56, 80, 138, 184, 272, 408, 608, 904, 1352, 2048,
@@ -1546,6 +1550,13 @@ static int qpnp_pon_probe(struct spmi_device *spmi)
 	boot_reason = ffs(pon_sts);
 
 	index = ffs(pon_sts) - 1;
+
+#ifdef CONFIG_ARCH_PA29
+	printk("\n[DEBUG] var sharp_display_status: %s\n", sharp_display_status ? "on" : "off");
+	if (!sharp_display_status)
+		machine_restart("recovery");
+#endif
+
 	cold_boot = !qpnp_pon_is_warm_reset();
 	if (index >= ARRAY_SIZE(qpnp_pon_reason) || index < 0) {
 		dev_info(&pon->spmi->dev,
